@@ -2,17 +2,18 @@ package org.lba.beancontextmanagement.xml;
 
 import org.lba.beancontextmanagement.xml.prototype.MessagePrototypeBean;
 import org.lba.beancontextmanagement.xml.singleton.MessageSingletonBean;
+import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.GenericXmlApplicationContext;
 
 public class BeanContextMainApp {
 
 	public static void main(String[] args) {
-		GenericXmlApplicationContext ctx = new GenericXmlApplicationContext();
-		ctx.load("classpath:META-INF/spring/app-context-for-bean-instantiation.xml");
-		ctx.refresh();
+		GenericXmlApplicationContext springXmlFileContext = new GenericXmlApplicationContext();
+		springXmlFileContext.load("classpath:META-INF/spring/app-context-for-bean-instantiation.xml");
+		springXmlFileContext.refresh();
 		
 		System.out.println("** Singleton **");
-		MessageSingletonBean messageSingletonBean1 = ctx.getBean("messageSingletonBean", MessageSingletonBean.class);
+		MessageSingletonBean messageSingletonBean1 = springXmlFileContext.getBean("messageSingletonBean", MessageSingletonBean.class);
 		 
         // Setting the object properties.
 		messageSingletonBean1.setId(1001);
@@ -21,11 +22,11 @@ public class BeanContextMainApp {
         System.out.println(messageSingletonBean1.toString());
  
         // Retrieve it again.
-        MessageSingletonBean messageSingletonBean2 = ctx.getBean("messageSingletonBean", MessageSingletonBean.class);
+        MessageSingletonBean messageSingletonBean2 = springXmlFileContext.getBean("messageSingletonBean", MessageSingletonBean.class);
         System.out.println(messageSingletonBean2.toString());
 		
 		System.out.println("** Prototype **");
-		MessagePrototypeBean messagePrototypeBean1 = (MessagePrototypeBean) ctx.getBean("messagePrototypeBean");
+		MessagePrototypeBean messagePrototypeBean1 = (MessagePrototypeBean) springXmlFileContext.getBean("messagePrototypeBean");
 		
 		messagePrototypeBean1.setId(1001);
 		messagePrototypeBean1.setMessage("Hello world!");
@@ -33,8 +34,9 @@ public class BeanContextMainApp {
         System.out.println(messagePrototypeBean1.toString());
         
         // Retrieve it again.
-        MessagePrototypeBean messagePrototypeBean2 = ctx.getBean("messagePrototypeBean", MessagePrototypeBean.class);
+        MessagePrototypeBean messagePrototypeBean2 = springXmlFileContext.getBean("messagePrototypeBean", MessagePrototypeBean.class);
         System.out.println(messagePrototypeBean2.toString());
         
+        ((ConfigurableApplicationContext)springXmlFileContext ).close();
 	}
 }
