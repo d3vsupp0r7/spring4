@@ -15,7 +15,6 @@ public class ContextualizedSpringDependencyLookupMainApp {
 
 		DefaultListableBeanFactory bf = new DefaultListableBeanFactory();
 		BeanDefinitionReader reader = new PropertiesBeanDefinitionReader(bf);
-	//	reader.loadBeanDefinitions(new ClassPathResource("classpath:META-INF/spring/context.properties"));
 		reader.loadBeanDefinitions(new ClassPathResource("context.properties"));
 		
 		ManagedComponentServiceLookupImpl mscl = new ManagedComponentServiceLookupImpl();
