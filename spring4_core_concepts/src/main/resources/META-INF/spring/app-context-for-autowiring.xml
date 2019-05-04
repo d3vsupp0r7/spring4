@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+http://www.springframework.org/schema/util
+http://www.springframework.org/schema/util/spring-util.xsd">
+
+	<bean id="beanA" class="org.lba.autowiring.MyBeanA" />
+	<bean id="beanB" class="org.lba.autowiring.MyBeanB" />
+
+	<!-- byName -->
+	<bean id="targetByName" autowire="byName"
+		class="org.lba.autowiring.Target" lazy-init="true" />
+
+	<!-- byType -->
+	<bean id="targetByType" autowire="byType"
+		class="org.lba.autowiring.Target" lazy-init="true" />
+
+	<!-- constructor -->
+	<bean id="targetConstructor" autowire="constructor"
+		class="org.lba.autowiring.Target" lazy-init="true" />
+
+	<!-- ByName -->
+	<bean id="employeeAutowiringByName"
+		class="org.lba.autowiring.byname.EmployeeAutowiringByNameExample" autowire="byName">
+		<property name="name" value="anEmployeeName" />
+		<property name="surname" value="anEmployeeSurnameName" />
+	</bean>
+
+	<bean id="departmentAutowiringByName"
+		class="org.lba.autowiring.byname.DepartmentAutowiringByNameExample">
+		<property name="departmentName" value="Human Resource" />
+	</bean>
+	
+	<!-- ByType -->
+<bean id="employeeAutowiringByType"
+		class="org.lba.autowiring.bytype.EmployeeAutowiringByTypeExample" autowire="byType">
+		<property name="name" value="anEmployeeName" />
+		<property name="surname" value="anEmployeeSurnameName" />
+	</bean>
+
+	<bean id="departmentAutowiringByType"
+		class="org.lba.autowiring.bytype.DepartmentAutowiringByTypeExample">
+		<property name="departmentName" value="Human Resource" />
+	</bean>
+	
+	<!-- ByConstructor -->
+	<bean id="employeeAutowiringByConstructor"
+		class="org.lba.autowiring.byconstructor.EmployeeAutowiringByConstructorExample" autowire="constructor">
+		<property name="name" value="anEmployeeName" />
+		<property name="surname" value="anEmployeeSurnameName" />
+	</bean>
+
+	<bean id="departmentAutowiringByConstructor"
+		class="org.lba.autowiring.byconstructor.DepartmentAutowiringByConstructorExample">
+		<property name="departmentName" value="Human Resource" />
+	</bean>
+	
+</beans>
