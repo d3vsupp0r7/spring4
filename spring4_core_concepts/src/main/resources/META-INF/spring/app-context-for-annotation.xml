@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+http://www.springframework.org/schema/util
+http://www.springframework.org/schema/util/spring-util.xsd">
+
+	<context:annotation-config />
+
+	<context:component-scan
+		base-package="org.lba.dipendenceinjection.annotation" />
+
+	<!-- For properties scan -->
+	<context:property-placeholder
+		location="classpath:config-file.properties" />
+
+	<!-- Map -->
+	<util:map id="map" map-class="java.util.HashMap">
+		<entry key="someValue">
+			<value>Hello World!</value>
+		</entry>
+		<entry key="someBean">
+			<ref bean="collectionDependency" />
+		</entry>
+	</util:map>
+
+	<util:properties id="props">
+		<prop key="firstName">aExampleFirstName</prop>
+		<prop key="secondName">aExampleSecondName</prop>
+	</util:properties>
+	<util:set id="set">
+		<value>Hello World!</value>
+		<ref bean="collectionDependency" />
+	</util:set>
+	<util:list id="list">
+		<value>Hello World!</value>
+		<ref bean="collectionDependency" />
+	</util:list>
+
+
+	<bean id="collectionDependency"
+		class="org.lba.dipendenceinjection.xml.contextualized.Dependency">
+		<constructor-arg value="${dependency.collection.name}"></constructor-arg>
+	</bean>
+</beans>
