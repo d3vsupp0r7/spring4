@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+http://www.springframework.org/schema/util
+http://www.springframework.org/schema/util/spring-util.xsd"
+	default-lazy-init="true">
+
+	<!-- Enable annotation management -->
+	<context:annotation-config />
+
+	<!-- PostConstruct -->
+	<bean id="simpleBean1PostConstruct"
+		class="org.lba.beanlifecycle.initphase.postconstruct.SimpleBeanWithJSR250PostConstructAnnotation"
+		p:name="SampleEmployeeBeanOneWithPostConstruct" p:age="32" />
+	<bean id="simpleBean2PostConstruct"
+		class="org.lba.beanlifecycle.initphase.postconstruct.SimpleBeanWithJSR250PostConstructAnnotation"
+		p:age="32" />
+	<bean id="simpleBean3PostConstruct"
+		class="org.lba.beanlifecycle.initphase.postconstruct.SimpleBeanWithJSR250PostConstructAnnotation"
+		p:name="SampleEmployeeBeanThreeWithPostConstruct" />
+
+	<!-- PreDestroy -->
+	<bean id="destructiveBeanWithPreDestroy"
+		class="org.lba.beanlifecycle.destroyphase.predestroy.DestructiveBeanWithJSR250"
+		p:filePath="#{systemProperties['java.io.tmpdir']}#{systemProperties['file.separator']}test.txt" />
+</beans>

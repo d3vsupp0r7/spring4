@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+http://www.springframework.org/schema/util
+http://www.springframework.org/schema/util/spring-util.xsd"
+	default-lazy-init="true">
+
+	<bean id="simpleBean1"
+		class="org.lba.beanlifecycle.initphase.initmethod.SimpleBean"
+		init-method="init" p:name="SampleEmployeeBeanOne" p:age="32" />
+
+	<bean id="simpleBean2"
+		class="org.lba.beanlifecycle.initphase.initmethod.SimpleBean"
+		init-method="init" p:age="32" />
+
+	<bean id="simpleBean3"
+		class="org.lba.beanlifecycle.initphase.initmethod.SimpleBean"
+		init-method="init" p:name="SampleEmployeeBeanThree" />
+
+	<!-- Init phase with interface: InitializingBean -->
+	<bean id="simpleBean1WithInitializingBean"
+		class="org.lba.beanlifecycle.initphase.SimpleBeanWithInterface"
+		p:name="SampleEmployeeBeanOneWithInitializingBean" p:age="32" />
+	<bean id="simpleBean2WithInitializingBean"
+		class="org.lba.beanlifecycle.initphase.SimpleBeanWithInterface"
+		p:age="32" />
+	<bean id="simpleBean3WithInitializingBean"
+		class="org.lba.beanlifecycle.initphase.SimpleBeanWithInterface"
+		p:name="SampleEmployeeBeanThreeWithInitializingBean" />
+
+	<!-- Destroy Phase example -->
+	<bean id="destructiveBean"
+		class="org.lba.beanlifecycle.destroyphase.destroymethod.DestructiveBean"
+		destroy-method="destroy"
+		p:filePath="#{systemProperties['java.io.tmpdir']}#{systemProperties['file.separator']}test.txt" />
+		
+		<bean id="destructiveBeanWithDisposableInterface"
+class="org.lba.beanlifecycle.destroyphase.disposable.DestructiveBeanWithInterface"
+p:filePath=
+"#{systemProperties['java.io.tmpdir']}#{systemProperties['file.separator']}test.txt"/>
+</beans>
