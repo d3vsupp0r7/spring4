@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:int="http://www.springframework.org/schema/integration"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/integration http://www.springframework.org/schema/integration/spring-integration-4.3.xsd
+                        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd 
+                        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+	<context:annotation-config />
+
+	<context:component-scan
+		base-package=" org.lba.spring4.springintegration" />
+	<int:channel id="senderChannel">
+		<int:queue capacity="10" />
+	</int:channel>
+	<int:channel id="receiverChannel">
+		<int:queue capacity="10" />
+	</int:channel>
+	<int:channel id="trashChannel">
+		<int:queue capacity="10" />
+	</int:channel>
+	<int:channel id="senderChannelForNested">
+		<int:queue capacity="10" />
+	</int:channel>
+	<int:channel id="gatewaySenderChannelForNested">
+		<int:queue capacity="10" />
+	</int:channel>
+	<int:channel id="receiverChannelForNested">
+		<int:queue capacity="10" />
+	</int:channel>
+
+	<!-- Chan type 1 -->
+	<int:chain id="employeeChain" input-channel="senderChannel"
+		output-channel="receiverChannel">
+		<int:header-enricher>
+			<int:header name="enriched" value="enriched-Header" />
+		</int:header-enricher>
+		<int:filter ref="employeeFilter"
+			throw-exception-on-rejection="true" discard-channel="trashChannel" />
+		<int:service-activator
+			ref="messageHandlerWithObject" requires-reply="true"
+			method="handleMessage" />
+	</int:chain>
+
+	<bean id="employeeFilter"
+		class="org.springframework.integration.filter.MessageFilter"
+		scope="prototype">
+		<constructor-arg ref="employeeNameFilterForChain" />
+	</bean>
+
+	<!-- Chain type 2 -->
+	<int:chain id="employeeProducerNestedChain"
+		input-channel="senderChannelForNested"
+		output-channel="receiverChannelForNested">
+		<int:header-enricher>
+			<int:header name="main-channel"
+				ref="employeeHeaderEnricher" method="appendTime" />
+		</int:header-enricher>
+		<int:filter ref="employeeFilter"
+			throw-exception-on-rejection="true" discard-channel="trashChannel" />
+		<int:gateway
+			request-channel="gatewaySenderChannelForNested" />
+	</int:chain>
+	<int:chain id="employeeRecieverNestedChain"
+		input-channel="gatewaySenderChannelForNested">
+		<int:header-enricher>
+			<int:header name="nested-channel"
+				ref="employeeHeaderEnricher" method="appendTime" />
+		</int:header-enricher>
+		<int:filter ref="employeeFilter"
+			throw-exception-on-rejection="true" discard-channel="trashChannel" />
+	</int:chain>
+
+	<int:poller id="poller" default="true" fixed-delay="1000" />
+
+</beans>
