@@ -7,4 +7,6 @@ import org.lba.spring4.db.model.EmployeeDBModel;
 public interface EmployeeService {
 
 	public List<EmployeeDBModel> getAllEmployees();
+
+	public EmployeeDBModel deleteEmployeeById(Long id);
 }

@@ -17,7 +17,6 @@
 	<br />
 	
 	<c:set var="contextPath" value="${pageContext.request.contextPath}"/>
-	<spring:url value="employee-web/submitAddEmployee" var="userActionUrl" />
 	
 	<form:form method="post" modelAttribute="employee" action="${contextPath}/employee-web/submitAddEmployee">
 		<table>

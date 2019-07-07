@@ -10,9 +10,11 @@ import org.lba.spring4.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -70,11 +72,11 @@ public class EmployeeControllerImpl implements EmployeeController{
 
 	@Override
 	@GetMapping("/listAllEmployee")
-	public List<EmployeeModel> readAllEmployees(@ModelAttribute("employee") EmployeeModel user, Model model) {
+	public String readAllEmployees(ModelMap model) {
 
 		List<EmployeeDBModel> employeeFromDB = employeeService.getAllEmployees();
-
-		return null;
+		model.addAttribute("employees",employeeFromDB);
+		return "employees/allEmployees";
 	}
 
 	@Override
@@ -87,6 +89,14 @@ public class EmployeeControllerImpl implements EmployeeController{
 	public EmployeeModel deleteEmployee(EmployeeModel aEmployee) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	@RequestMapping(value = { "/delete-employee/{id}" }, method = RequestMethod.GET)
+	public String deleteEmployeeById(@PathVariable String id) {
+		 employeeService.deleteEmployeeById(Long.parseLong(id));
+		 
+		 return "redirect:/employee-web/listAllEmployee";
 	}
 
 

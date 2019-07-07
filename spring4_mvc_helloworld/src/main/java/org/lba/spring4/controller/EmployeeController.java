@@ -1,17 +1,20 @@
 package org.lba.spring4.controller;
 
-import java.util.List;
-
 import org.lba.spring4.controller.data.EmployeeModel;
+import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 
 public interface EmployeeController {
 
 	//C
-	public EmployeeModel createEmployee(EmployeeModel aEmployee);
+	public String createEmployee(@ModelAttribute("employee") EmployeeModel aEmployee, BindingResult result);
 	//R
-	public List<EmployeeModel> readAllEmployees();
+	public String readAllEmployees(ModelMap model);
 	//U
 	public EmployeeModel updateEmployee(EmployeeModel aEmployee);
 	//D
 	public EmployeeModel deleteEmployee(EmployeeModel aEmployee);
+	public String deleteEmployeeById(@PathVariable  String id);
 }

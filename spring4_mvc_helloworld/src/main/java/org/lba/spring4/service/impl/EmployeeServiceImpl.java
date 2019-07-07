@@ -21,4 +21,15 @@ public class EmployeeServiceImpl implements EmployeeService {
 	public List<EmployeeDBModel> getAllEmployees() {
 		return employeeRepository.findAll();
 	}
+
+	@Override
+	public EmployeeDBModel deleteEmployeeById(Long id) {
+		
+		EmployeeDBModel toDelete = employeeRepository.findById(id);
+		if(toDelete!= null) {
+			employeeRepository.delete(id);
+		}
+		
+		return toDelete;
+	}
 }
