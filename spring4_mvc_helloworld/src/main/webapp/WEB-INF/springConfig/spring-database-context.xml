@@ -60,6 +60,7 @@
 			<props>
 				<prop key="hibernate.dialect">${hibernate.dialect.config}</prop>
 				<prop key="hibernate.hbm2ddl.auto">${hibernate.hbm2ddl.auto.config}</prop>
+<!-- 				<prop key="hibernate.hbm2ddl.import_files">data.sql</prop> -->
 				<!-- -->
 				<prop key="hibernate.show_sql">${hibernate.show_sql.config}</prop>
 				<prop key="hibernate.format_sql">${hibernate.format_sql.config}</prop>
@@ -75,15 +76,15 @@
 	
 	<!--  -->
 	<!-- Run H2 web server within application that will access the same in-memory database -->
-    <!-- <bean id="h2Server" class="org.h2.tools.Server" factory-method="createTcpServer" init-method="start" destroy-method="stop" depends-on="h2WebServer">
+   <bean id="h2Server" class="org.h2.tools.Server" factory-method="createTcpServer" init-method="start" destroy-method="stop" depends-on="h2WebServer">
         <constructor-arg value="-tcp,-tcpAllowOthers,-tcpPort,9092"/>
-    </bean> -->
-<!--     <bean id="h2WebServer" class="org.h2.tools.Server" factory-method="createWebServer" init-method="start" destroy-method="stop"> -->
-<!--         <constructor-arg value="-web,-webAllowOthers,-webPort,9010"/> -->
-<!--     </bean> -->
+    </bean> 
+     <bean id="h2WebServer" class="org.h2.tools.Server" factory-method="createWebServer" init-method="start" destroy-method="stop"> 
+         <constructor-arg value="-web,-webAllowOthers,-webPort,9010"/> 
+    </bean> 
 	<!-- 2.5 Init database scripts -->
-<!-- 	<jdbc:initialize-database -->
+<!-- 	<jdbc:initialize-database  -->
 <!-- 		data-source="datasource" ignore-failures="DROPS"> -->
-<!-- 		<jdbc:script location="classpath:data.sql" /> -->
-<!-- 	</jdbc:initialize-database> -->
+<!--  		<jdbc:script location="classpath:data.sql" />  -->
+<!--  	</jdbc:initialize-database> -->
 </beans>
