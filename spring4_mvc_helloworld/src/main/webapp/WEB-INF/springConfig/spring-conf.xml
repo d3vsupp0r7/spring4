@@ -23,7 +23,11 @@
  	<!--  -->
  	<util:properties id="viewPropertyConfigurer" location="classpath:application.properties"/> 
  	
- 	
+ 	<!-- Message resources -->
+ 	<bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+        <property name="basename" value="messages" />
+    </bean>
+    
 	<context:component-scan
 		base-package="org.lba.spring4" />
 
