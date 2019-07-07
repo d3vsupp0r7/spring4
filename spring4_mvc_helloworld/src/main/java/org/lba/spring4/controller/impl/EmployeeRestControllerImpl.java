@@ -28,7 +28,7 @@ public class EmployeeRestControllerImpl implements EmployeeRestController{
 	}
 
 	@Override
-	@GetMapping("/allEmployee")
+	@GetMapping("/allEmployees")
 	public List<EmployeeDBModel> readAllEmployees() {
 		return employeeService.getAllEmployees();
 	}
