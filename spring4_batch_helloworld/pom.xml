@@ -38,12 +38,12 @@
 			<artifactId>spring-batch-core</artifactId>
 			<version>${spring-batch.version}</version>
 		</dependency>
-		
+
 		<dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-jdbc</artifactId>
-         <version>${spring.version}</version>
-        </dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-jdbc</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
 
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -82,7 +82,7 @@
 			<artifactId>h2</artifactId>
 			<version>${h2.version}</version>
 		</dependency>
-		
+
 		<!-- Util library -->
 		<!-- log4j -->
 		<dependency>
@@ -90,6 +90,9 @@
 			<artifactId>log4j</artifactId>
 			<version>${log4j.version}</version>
 		</dependency>
+
+	
+
 
 	</dependencies>
 </project>
