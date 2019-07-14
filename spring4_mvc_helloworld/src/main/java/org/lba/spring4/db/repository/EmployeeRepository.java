@@ -1,15 +1,15 @@
 package org.lba.spring4.db.repository;
 
-import org.lba.spring4.db.model.EmployeeDBModel;
+import org.lba.spring4.db.model.Employee;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface EmployeeRepository  extends JpaRepository<EmployeeDBModel, Long>{
+public interface EmployeeRepository  extends JpaRepository<Employee, Long>{
 
-	EmployeeDBModel findById(Long id);
+	Employee findById(Long id);
 
-	EmployeeDBModel findByName(String name);
+	Employee findByName(String name);
 
 }
 

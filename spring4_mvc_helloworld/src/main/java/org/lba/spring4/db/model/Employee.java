@@ -9,7 +9,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "employee")
-public class EmployeeDBModel {
+public class Employee {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,17 +20,17 @@ public class EmployeeDBModel {
 	@Column(name="surname")
 	private String surname;
 	
-	public EmployeeDBModel() {
+	public Employee() {
 		super();
 	}
 
-	public EmployeeDBModel( String name, String surname) {
+	public Employee( String name, String surname) {
 		super();
 		this.name = name;
 		this.surname = surname;
 	}
 	
-	public EmployeeDBModel(Long id, String name, String surname) {
+	public Employee(Long id, String name, String surname) {
 		super();
 		this.id = id;
 		this.name = name;

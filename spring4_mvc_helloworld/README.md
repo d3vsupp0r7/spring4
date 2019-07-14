@@ -27,10 +27,10 @@ This is a Spring 4.x XML configuration CRUD example, based on employee managemen
 ## Navigation paths UI
 
 ### Home page
-http://localhost:8080/spring4_mvc_annotation_config_helloworld/
+http://localhost:8080/spring4_mvc_helloworld/
 
 ### Employee UI  
-http://localhost:8080/spring4_mvc_helloworld/employee-web/listAllEmployee  
+http://localhost:8080/spring4_mvc_helloworld/employee-web/readEmployees  
 http://localhost:8080/spring4_mvc_helloworld/employee-web/addEmployee
 
 ### H2 Web console

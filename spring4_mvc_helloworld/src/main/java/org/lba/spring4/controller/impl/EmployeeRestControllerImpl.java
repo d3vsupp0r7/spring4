@@ -5,7 +5,7 @@ import java.util.List;
 import org.apache.log4j.Logger;
 import org.lba.spring4.controller.EmployeeRestController;
 import org.lba.spring4.controller.data.EmployeeModel;
-import org.lba.spring4.db.model.EmployeeDBModel;
+import org.lba.spring4.db.model.Employee;
 import org.lba.spring4.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,8 +29,8 @@ public class EmployeeRestControllerImpl implements EmployeeRestController{
 
 	@Override
 	@GetMapping("/allEmployees")
-	public List<EmployeeDBModel> readAllEmployees() {
-		return employeeService.getAllEmployees();
+	public List<Employee> readAllEmployees() {
+		return employeeService.listAllEmployees();
 	}
 
 	@Override
