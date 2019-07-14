@@ -3,6 +3,7 @@ package org.lba.spring4.batch.fieldmappers;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
+import org.apache.log4j.Logger;
 import org.lba.spring4.batch.model.Report;
 import org.springframework.batch.item.file.mapping.FieldSetMapper;
 import org.springframework.batch.item.file.transform.FieldSet;
@@ -10,6 +11,8 @@ import org.springframework.validation.BindException;
  
 public class ReportFieldSetMapper implements FieldSetMapper<Report> {
  
+	static final Logger logger = Logger.getLogger(ReportFieldSetMapper.class);
+	
     static Report reportObj;
     
     private SimpleDateFormat dateFormatObj = new SimpleDateFormat("dd/MM/yyyy");
@@ -26,6 +29,7 @@ public class ReportFieldSetMapper implements FieldSetMapper<Report> {
         
         try {
             reportObj.setDate(dateFormatObj.parse(csvDate));
+            
         } catch (ParseException parseExceptionObj) {
             parseExceptionObj.printStackTrace();
         }

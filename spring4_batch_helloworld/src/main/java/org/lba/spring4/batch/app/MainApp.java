@@ -1,21 +1,27 @@
 package org.lba.spring4.batch.app;
 
+import org.apache.log4j.Logger;
+import org.lba.spring4.batch.fieldmappers.ReportFieldSetMapper;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.JobExecution;
 import org.springframework.batch.core.JobParameters;
 import org.springframework.batch.core.launch.JobLauncher;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.GenericXmlApplicationContext;
 
 public class MainApp {
 
+	static final Logger logger = Logger.getLogger(ReportFieldSetMapper.class);
+	
+	/**/
 	static Job jobObj;
     static JobLauncher jobLauncherObj;
     static ApplicationContext contextObj;
-    private static String[] springConfig  = {"spring/batch/jobs/spring-beans.xml" };
  
     public static void main(String[] args) {        
-        // Loading The Bean Definition From The Spring Configuration File
+        
+    	// Loading The Bean Definition From The Spring Configuration File
     	GenericXmlApplicationContext contextObj = new GenericXmlApplicationContext();
     	contextObj.load("classpath:spring/batch/jobs/spring-beans.xml");
     	contextObj.refresh();
@@ -25,11 +31,13 @@ public class MainApp {
         
         try {
             JobExecution execution = jobLauncherObj.run(jobObj, new JobParameters());
-            System.out.println("Exit Status : " + execution.getStatus());
+            logger.debug("Exit Status : " + execution.getStatus());
         } catch (Exception exceptionObj) {
             exceptionObj.printStackTrace();
         }
         
-        System.out.println("Done");
+        logger.debug("Done");
+        //
+		((ConfigurableApplicationContext)contextObj ).close();
     }
 }
