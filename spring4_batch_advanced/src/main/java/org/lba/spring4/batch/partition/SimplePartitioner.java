@@ -33,6 +33,8 @@ public class SimplePartitioner implements Partitioner {
 			logger.debug(key + " : " + value);
 		}
 		
+		logger.debug("** Injected property:  " + injectedPropertiesOne );
+		
 		logger.debug("*** SimplePartitioner - PostConstruct -   END ***");
 	}
 
