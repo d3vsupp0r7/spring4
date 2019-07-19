@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<employees>
+	<employee>
+		<id>100</id>
+		<name>ASampleName_100</name>
+		<surname>ASampleSurname_100</surname>
+		<bornDate class="sql-date">1980-01-01</bornDate>
+	</employee>
+	<employee>
+		<id>101</id>
+		<name>ASampleName_101</name>
+		<surname>ASampleSurname_101</surname>
+		<bornDate class="sql-date">1980-02-01</bornDate>
+	</employee>
+	<employee>
+		<id>102</id>
+		<name>ASampleName_102</name>
+		<surname>ASampleSurname_102</surname>
+		<bornDate class="sql-date">1980-03-01</bornDate>
+	</employee>
+</employees>

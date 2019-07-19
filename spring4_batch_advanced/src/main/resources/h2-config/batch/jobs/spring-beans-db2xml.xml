@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:batch="http://www.springframework.org/schema/batch"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:util="http://www.springframework.org/schema/util" 
+	xsi:schemaLocation="http://www.springframework.org/schema/batch  http://www.springframework.org/schema/batch/spring-batch.xsd  
+http://www.springframework.org/schema/beans  http://www.springframework.org/schema/beans/spring-beans.xsd  
+http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa.xsd
+http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd 
+http://www.springframework.org/schema/util	http://www.springframework.org/schema/util/spring-util.xsd">
+
+	<import resource="../config/spring-context.xml" />
+	<import resource="../config/spring-datasource.xml" />
+
+	<!-- 1. Autoscan for service -->
+	<context:component-scan
+		base-package="org.lba.spring4.service.impl">
+	</context:component-scan>
+
+	<!-- 2. Read Form DB -->
+	<bean id="databaseItemReader"
+		class="org.springframework.batch.item.database.JdbcCursorItemReader"
+		scope="step">
+		<property name="dataSource" ref="dataSource" />
+		<property name="sql"
+			value="select ID, NAME, SURNAME, BORNDATE from EMPLOYEE" />
+		<property name="rowMapper">
+			<bean class="org.lba.spring4.batch.rowmapper.EmployeeRowMapper" />
+		</property>
+	</bean>
+	
+	<!-- 3. WriteToXml -->
+	<bean id="xmlItemWriter" 
+                class="org.springframework.batch.item.xml.StaxEventItemWriter">
+		<property name="resource" value="file:xml/outputs/employees.xml" />
+		<property name="marshaller" ref="employeeUnmarshaller" />
+		<property name="rootTagName" value="employees" />
+	</bean>
+	
+	<bean id="employeeUnmarshaller" 
+                class="org.springframework.oxm.xstream.XStreamMarshaller">
+		<property name="aliases">
+			<util:map id="aliases">
+				<entry key="employee" value="org.lba.spring4.model.EmployeeModel" />
+			</util:map>
+		</property>
+	</bean>
+	
+	<!-- 4. Job definition -->
+	<batch:job id="H2DBtoXmlFileJob">
+    <batch:step id="step1">
+         <batch:tasklet>
+            <batch:chunk reader="databaseItemReader" writer="xmlItemWriter" commit-interval="1" />
+         </batch:tasklet>
+      </batch:step>
+   </batch:job>
+   
+</beans>

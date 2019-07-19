@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+	xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans    http://www.springframework.org/schema/beans/spring-beans.xsd
+	   http://www.springframework.org/schema/jdbc    http://www.springframework.org/schema/jdbc/spring-jdbc.xsd
+	   http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa.xsd
+	   http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+	<!-- Connect To H2 Database -->
+	<jpa:repositories
+		base-package="org.lba.spring4.repository" />
+	<tx:annotation-driven />
+	<tx:jta-transaction-manager />
+
+	<bean
+		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean"
+		id="entityManagerFactory">
+
+		<property name="dataSource" ref="dataSource" />
+		<property value="${model.entity.package}"
+			name="packagesToScan" />
+		<property name="jpaVendorAdapter">
+			<bean
+				class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter" />
+		</property>
+		<property name="jpaProperties">
+			<!-- H2 config -->
+			<props>
+				<prop key="hibernate.dialect">${hibernate.dialect.config}</prop>
+				<prop key="hibernate.hbm2ddl.auto">${hibernate.hbm2ddl.auto.config}</prop>
+				<!-- -->
+				<prop key="hibernate.show_sql">${hibernate.show_sql.config}</prop>
+				<prop key="hibernate.format_sql">${hibernate.format_sql.config}</prop>
+			</props>
+		</property>
+	</bean>
+	<!-- 2.4 Transaction manager -->
+	<bean class="org.springframework.orm.jpa.JpaTransactionManager"
+		id="transactionManager">
+		<property name="entityManagerFactory"
+			ref="entityManagerFactory" />
+	</bean>
+
+	<!-- Create Spring Jobs Meta-Tables Automatically -->
+	<jdbc:embedded-database id="dataSource"
+		type="H2">
+		<jdbc:script
+			location="classpath:org/springframework/batch/core/schema-drop-h2.sql" />
+		<jdbc:script
+			location="classpath:/org/springframework/batch/core/schema-h2.sql" />
+		<!-- -->
+	</jdbc:embedded-database>
+
+	<jdbc:initialize-database
+		data-source="dataSource" ignore-failures="DROPS">
+		<jdbc:script
+			location="classpath:/h2-config/sql/data-load.sql" />
+	</jdbc:initialize-database>
+
+
+</beans>
