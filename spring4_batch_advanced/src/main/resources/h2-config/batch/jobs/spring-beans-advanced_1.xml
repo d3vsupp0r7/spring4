@@ -79,6 +79,11 @@ http://www.springframework.org/schema/util	http://www.springframework.org/schema
 				<batch:handler grid-size="1"
 					task-executor="taskExecutor" />
 			</batch:partition>
+
+			<batch:listeners>
+				<batch:listener ref="loggerHandlerListener" />
+			</batch:listeners>
+			
 		</batch:step>
 		<!-- step2: -->
 		<batch:step id="step2" next="step3">
@@ -88,6 +93,11 @@ http://www.springframework.org/schema/util	http://www.springframework.org/schema
 		<batch:step id="step3">
 			<tasklet ref="worldTwo" />
 		</batch:step>
+
+		<batch:listeners>
+			<batch:listener ref="loggerHandlerListener" />
+		</batch:listeners>
+
 	</batch:job>
 
 	<!-- Definition of taskExecutor -->
@@ -97,12 +107,13 @@ http://www.springframework.org/schema/util	http://www.springframework.org/schema
 	<!-- Definition of partitioner bean -->
 	<bean name="partitionerClass"
 		class="org.lba.spring4.batch.partition.SimplePartitioner" scope="step">
-		<property name="injectedPropertiesOne" value="anInjectedProperties" />
+		<property name="injectedPropertiesOne"
+			value="anInjectedProperties" />
 		<property name="properties" ref="batchListProps" />
 	</bean>
 
 	<!-- Definition of job listeners -->
-	<bean name="loggerHandlerListener"
+	<bean id="loggerHandlerListener" name="loggerHandlerListener"
 		class="org.lba.spring4.batch.listener.LoggerHandlerListener">
 	</bean>
 
@@ -119,16 +130,16 @@ http://www.springframework.org/schema/util	http://www.springframework.org/schema
 
 	<!-- Simple definition of partitioner -->
 	<batch:step id="partitionerStepId">
+		<!-- -->
 		<batch:tasklet transaction-manager="transactionManager">
+			<!-- -->
 			<batch:chunk reader="xmlItemReader"
 				writer="databaseItemWriter" commit-interval="1" skip-limit="1">
 				<batch:skippable-exception-classes>
 					<batch:include class="java.lang.Exception" />
 				</batch:skippable-exception-classes>
 			</batch:chunk>
-			<batch:listeners>
-				<batch:listener ref="loggerHandlerListener" />
-			</batch:listeners>
+			
 		</batch:tasklet>
 	</batch:step>
 </beans>
