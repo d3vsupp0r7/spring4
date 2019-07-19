@@ -23,7 +23,7 @@ public class SimplePartitioner implements Partitioner {
 	@PostConstruct
 	protected final void init() throws IOException {
 
-		logger.debug("*** FilePartitioner - PostConstruct - START ***");
+		logger.debug("*** SimplePartitioner - PostConstruct - START ***");
 		
 		logger.debug("** Initial properties for SimplePartitioner");
 		Enumeration<String> enums = (Enumeration<String>) properties.propertyNames();
@@ -33,17 +33,17 @@ public class SimplePartitioner implements Partitioner {
 			logger.debug(key + " : " + value);
 		}
 		
-		logger.debug("*** FilePartitioner - PostConstruct -   END ***");
+		logger.debug("*** SimplePartitioner - PostConstruct -   END ***");
 	}
 
 	@Override
 	public Map<String, ExecutionContext> partition(int gridSize) {
 
-		logger.debug("*** FilePartitioner - partition - START ***");
+		logger.debug("*** SimplePartitioner - partition - START ***");
 
-		Map<String, ExecutionContext> result = new HashMap<String, ExecutionContext>();
+		Map<String, ExecutionContext> result = new HashMap<>();
 
-		logger.debug("*** FilePartitioner - partition -   END ***");
+		logger.debug("*** SimplePartitioner - partition -   END ***");
 
 		return result;
 	}
