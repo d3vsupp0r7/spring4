@@ -15,7 +15,17 @@
 This is a Spring 4.x XML configuration CRUD example, based on employee management domain.  
 
 ## Getting started
-*TO_DO*
+
+### H2 Sql Script files
+
+#### Schema
+
+Path: spring4_mvc_helloworld/scr/main/resources/**schema.sql**  
+
+#### Data
+
+Path: spring4_mvc_helloworld/scr/main/resources/**data.sql**  
+
 
 ### Prerequisite
 * Java version 1.8
@@ -35,6 +45,57 @@ http://localhost:8080/spring4_mvc_helloworld/employee-web/addEmployee
 
 ### H2 Web console
 http://localhost:9010
+
+# H2 Configuration
+
+With H2 embedded configuration, you need to do the following steps:
+
+1) Create the database structure
+2) Configure the spring xml file context in order to use JPA based approach.
+3) For debug purpose enable the H2 web console.
+
+All these configuration can be found to:
+
+*spring4_mvc_helloworld*/scr/main/webapp/WEB-INF/springConfig/**spring-database-context.xml** 
+
+## H2 schema and data configuration
+ 
+You need to add under the path ${project.basedir}/scr/main/resources the following file:
+* **schema.sql**: this file represent your database model;
+* **data.sql**  : this file represent the data to insert into your database model;  
+
+## H2 Configure the spring xml context file
+
+## H2 Enable web console.
+
+In order to enable the H2 web console you need to define the following beans inside the spring context:
+
+```
+...
+ <bean id="h2Server" class="org.h2.tools.Server" factory-method="createTcpServer" init-method="start" destroy-method="stop" depends-on="h2WebServer">
+        <constructor-arg value="-tcp,-tcpAllowOthers,-tcpPort,9092"/>
+    </bean> 
+    
+     <bean id="h2WebServer" class="org.h2.tools.Server" factory-method="createWebServer" init-method="start" destroy-method="stop"> 
+         <constructor-arg value="-web,-webAllowOthers,-webPort,9010"/> 
+    </bean> 
+...
+
+```
+
+
+### Login to H2 web console
+
+Go to http://localhost:9010 and enter the following data:  
+
+**Class driver:** org.h2.Driver    
+** JDBC URL:** jdbc:h2:mem:employeeDB  
+**User name:** sa
+
+The configuration for H2 connection are externalized into property file:  
+${project.basedir}/scr/main/resources/**dbConnectionH2.properties**
+
+![H2 Web console login](Screenshot/h2/1_h2_web_console_login.png)
 
 
 # Rest API

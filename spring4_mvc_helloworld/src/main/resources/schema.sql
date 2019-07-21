@@ -1,3 +1,4 @@
+-- EMPLOYEE TABLE
 create table if not exists employee(
 
    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
