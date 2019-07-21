@@ -11,7 +11,13 @@
   * [H2 Configure the Spring XML context file](#h2-configure-the-spring-xml-context-file)
     * [H2 Enable web console](#h2-enable-web-console)
     * [Login to H2 web console](#login-to-h2-web-console)
-  * [Built with](#built-with)
+* [Rest API](#rest-api)    
+  * [Create API](#create-api)
+  * [Read API](#read-api)
+  * [Update API](#update-api)
+  * [Delete API](#delete-api)
+
+* [Built with](#built-with)
     * [Default library dependency](#default-library-dependency)
       * [Maven plugins](#maven-plugins)
   * [Authors](#authors)  
@@ -106,27 +112,40 @@ ${project.basedir}/scr/main/resources/**dbConnectionH2.properties**
 
 
 # Rest API
-## Employee Rest controller
 
-http://localhost:8080/spring4_mvc_helloworld/rest/api/allEmployees
+## Create API
+*TO_DO*  
 
+## Read API 
 
-## Built with
+### Read all employees
+http://localhost:8080/spring4_mvc_helloworld/rest/api/employees
+
+### Read employees by id
+http://localhost:8080/spring4_mvc_helloworld/rest/api/employee/1
+
+## Update API
+*TO_DO*  
+
+## Delete API
+*TO_DO*
+
+# Built with
 * [Java SDK Version](http://www.oracle.com/technetwork/java/javase/downloads/index.html) - 1.8
 * [Maven](https://maven.apache.org/) - Dependency Management
 
-### Default library dependency
+## Default library dependency
 
-#### Maven plugins
+### Maven plugins
 * **maven-compiler-plugin.version:** 3.6.1
 
-#### Spring framework
+### Spring framework
 * **spring.version:** 4.3.24
 
 
-#### Utils library
+### Utils library
 
-##### Database
+#### Database
 * **h2.version:** 1.4.199
 
 
