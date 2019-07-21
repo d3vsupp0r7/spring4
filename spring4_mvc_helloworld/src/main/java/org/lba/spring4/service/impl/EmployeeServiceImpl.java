@@ -17,6 +17,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 	@Autowired
 	private EmployeeRepository employeeRepository;
 
+	/* CREATE */
 	@Override
 	public Employee saveEmployee(Employee employee) {
 	
@@ -24,6 +25,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 		return savedEmployee;
 	}
 
+	/* READ */
 	@Override
 	public List<Employee> listAllEmployees() {
 		return employeeRepository.findAll();
@@ -34,8 +36,22 @@ public class EmployeeServiceImpl implements EmployeeService {
 		return employeeRepository.findById(id);
 	}
 
+	/* UPDATE */
+	@Override
+	public int updateEmployeeById(long id,Employee employee) {
+	
+		int result = -1;
+		
+		result = employeeRepository.updateEmployeeById(id, employee.getName(), employee.getSurname());
+		
+		return result;
+	}
+	
+	/* DELETE */
 	@Override
 	public void deleteEmployeeById(long id) {
 		employeeRepository.delete(id);
 	}
+
+
 }

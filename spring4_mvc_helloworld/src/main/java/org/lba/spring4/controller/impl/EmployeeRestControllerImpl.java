@@ -11,6 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -26,9 +29,14 @@ public class EmployeeRestControllerImpl implements EmployeeRestController{
 
 	/*CREATE*/
 	@Override
-	public EmployeeModel createEmployee(EmployeeModel aEmployee) {
-		// TODO Auto-generated method stub
-		return null;
+	@PostMapping("/employee")
+	public Employee createEmployee(@RequestBody EmployeeModel aEmployee) {
+		
+		logger.debug("Create employee: " + aEmployee.toString());
+		Employee toSaveEmployee = new Employee(aEmployee.getName(), aEmployee.getSurname());
+
+		Employee savedEmployee = employeeService.saveEmployee(toSaveEmployee);
+		return savedEmployee;
 	}
 
 	/*READ*/
@@ -42,14 +50,26 @@ public class EmployeeRestControllerImpl implements EmployeeRestController{
 	public Employee getEmployeeById(@PathVariable("id") long id) {
 		
 		logger.debug("Fetching User with id " + id);
-		Employee user = employeeService.findById(id);		
-		return user;
+		Employee employee = employeeService.findById(id);		
+		return employee;
 	}
 
 	/*UPDATE*/
 	@Override
-	public EmployeeModel updateEmployee(EmployeeModel aEmployee) {
-		// TODO Auto-generated method stub
+	@PutMapping("/employee/{id}")
+	public EmployeeModel updateEmployee(@PathVariable("id") long id, @RequestBody EmployeeModel aEmployee) {
+
+		Employee employee = employeeService.findById(id);		
+		if (employee==null) {
+			logger.debug("Employee with id " + id + " not found");
+		}
+		
+		employee.setId(id);
+		employee.setName(aEmployee.getName());
+		employee.setSurname(aEmployee.getSurname());
+		
+		int resultOfUpdate = employeeService.updateEmployeeById(id, employee);
+		
 		return null;
 	}
 
@@ -59,6 +79,8 @@ public class EmployeeRestControllerImpl implements EmployeeRestController{
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+
 
 
 }

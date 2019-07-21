@@ -8,11 +8,13 @@ import org.lba.spring4.db.model.Employee;
 public interface EmployeeRestController {
 
 	//C
-	public EmployeeModel createEmployee(EmployeeModel aEmployee);
+	public Employee createEmployee(EmployeeModel aEmployee);
 	//R
 	public List<Employee> readAllEmployees();
+	public Employee getEmployeeById(long id);
 	//U
-	public EmployeeModel updateEmployee(EmployeeModel aEmployee);
+	public EmployeeModel updateEmployee(long id, EmployeeModel aEmployee);
 	//D
 	public EmployeeModel deleteEmployee(EmployeeModel aEmployee);
+	
 }

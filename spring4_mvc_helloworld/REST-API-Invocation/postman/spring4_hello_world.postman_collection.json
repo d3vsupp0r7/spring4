@@ -1,0 +1,114 @@
+{
+	"info": {
+		"_postman_id": "982f3455-0d38-4135-82ce-fca01b29e11c",
+		"name": "spring4_hello_world",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GET - listAllEmployees",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/spring4_mvc_helloworld/rest/api/employees",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"spring4_mvc_helloworld",
+						"rest",
+						"api",
+						"employees"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET - readEmployeeById",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/spring4_mvc_helloworld/rest/api/employee/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"spring4_mvc_helloworld",
+						"rest",
+						"api",
+						"employee",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST - createEmployee",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"name\":\"aName_From_RestApi\",\n\"surname\":\"aSurname_From_RestApi\"}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/spring4_mvc_helloworld/rest/api/employee",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"spring4_mvc_helloworld",
+						"rest",
+						"api",
+						"employee"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PUT - updateEmployeeById",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/spring4_mvc_helloworld/rest/api/employee",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"spring4_mvc_helloworld",
+						"rest",
+						"api",
+						"employee"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
