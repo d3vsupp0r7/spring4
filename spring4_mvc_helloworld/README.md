@@ -1,9 +1,12 @@
 # Table of Contents
 
 * [Scope](#scope)
-  * [Getting started](#getting-started)
-  * [Prerequisite](#prerequisite)
+* [Prerequisite](#prerequisite)
+* [Getting started](#getting-started)
+  * [H2 Sql Script files](#h2-sql-script-files)
     * [Installing](#installing)
+* [Navigation paths UI](#navigation-paths-ui)
+* [H2 Configuration](#h2-configuration)
   * [Built with](#built-with)
     * [Default library dependency](#default-library-dependency)
       * [Maven plugins](#maven-plugins)
@@ -14,27 +17,27 @@
 
 This is a Spring 4.x XML configuration CRUD example, based on employee management domain.  
 
-## Getting started
+# Prerequisite
+* Java version 1.8
+* Maven 
 
-### H2 Sql Script files
+# Getting started
 
-#### Schema
+## H2 Sql Script files
+
+### Schema
 
 Path: spring4_mvc_helloworld/scr/main/resources/**schema.sql**  
 
-#### Data
+### Data
 
 Path: spring4_mvc_helloworld/scr/main/resources/**data.sql**  
 
 
-### Prerequisite
-* Java version 1.8
-* Maven 
-
 ### Installing
 *TO_DO*
 
-## Navigation paths UI
+# Navigation paths UI
 
 ### Home page
 http://localhost:8080/spring4_mvc_helloworld/
@@ -58,15 +61,15 @@ All these configuration can be found to:
 
 *spring4_mvc_helloworld*/scr/main/webapp/WEB-INF/springConfig/**spring-database-context.xml** 
 
-## H2 schema and data configuration
+### H2 schema and data configuration
  
 You need to add under the path ${project.basedir}/scr/main/resources the following file:
 * **schema.sql**: this file represent your database model;
 * **data.sql**  : this file represent the data to insert into your database model;  
 
-## H2 Configure the spring xml context file
+### H2 Configure the spring xml context file
 
-## H2 Enable web console.
+### H2 Enable web console.
 
 In order to enable the H2 web console you need to define the following beans inside the spring context:
 
