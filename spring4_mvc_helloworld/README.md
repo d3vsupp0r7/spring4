@@ -8,8 +8,8 @@
 * [Navigation paths UI](#navigation-paths-ui)
 * [H2 Configuration](#h2-configuration)
   * [H2 schema and data configuration](#h2-schema-and-data-configuration)
-  * [ H2 Configure the Spring XML context file](#h2-configure-the-spring-xml-context-file)
-  * [H2 Enable web console](#h2-enable-web-console)
+  * [H2 Configure the Spring XML context file](#h2-configure-the-spring-xml-context-file)
+    * [H2 Enable web console](#h2-enable-web-console)
     * [Login to H2 web console](#login-to-h2-web-console)
   * [Built with](#built-with)
     * [Default library dependency](#default-library-dependency)
@@ -73,7 +73,7 @@ You need to add under the path ${project.basedir}/scr/main/resources the followi
 
 ## H2 Configure the Spring XML context file
 
-## H2 Enable web console
+### H2 Enable web console
 
 In order to enable the H2 web console you need to define the following beans inside the spring context:
 
