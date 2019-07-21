@@ -36,4 +36,13 @@ public class EmployeeServiceImplTests {
 		assertEquals("ASampleName001", employee.getName());
 	}
 	
+	@Test
+	public void whenSaveNewEmployee_returnSavedEmployee() {
+
+		Employee employee = new Employee("JUnitEmployeeName","JUnitEmployeeSurname");
+		Employee savedEmployee = employeeService.saveEmployee(employee);
+		assertNotNull(savedEmployee);
+		assertEquals("JUnitEmployeeName", savedEmployee.getName());
+	}
+	
 }
