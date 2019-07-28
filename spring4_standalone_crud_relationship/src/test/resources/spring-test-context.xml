@@ -1,33 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <beans
-	xsi:schemaLocation=" http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd 
-	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd 
-	http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd 
-	http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa.xsd
-	 http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc.xsd "
+	xsi:schemaLocation=" http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa.xsd "
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tx="http://www.springframework.org/schema/tx"
-	xmlns:jdbc="http://www.springframework.org/schema/jdbc"
 	xmlns:jpa="http://www.springframework.org/schema/data/jpa"
 	xmlns:context="http://www.springframework.org/schema/context" xmlns:p="http://www.springframework.org/schema/p"
 	xmlns="http://www.springframework.org/schema/beans">
 
 	<!-- DB Configuration parameters on properties -->
-	<context:property-placeholder
-		location="classpath:/h2-config/testH2DbConnection.properties,
-         classpath:springBeans.properties"
-		ignore-unresolvable="false" />
+	<context:property-placeholder location="classpath:testDbConnection.properties"
+		ignore-unresolvable="true" />
 
 	<!-- 0 Standard bean definition -->
-	<bean id="helloBean" class="${spring.beans.helloBean.fqn}">
+	<bean id="helloBean" class="org.lba.sample.spring3.HelloWorldSpringBean">
 	</bean>
 
 	<!-- 1. Autoscan for service -->
-	<context:component-scan base-package="org.lba.spring4.service.impl">
+	<context:component-scan base-package="org.lba.sample.spring3.service.impl">
 	</context:component-scan>
 	<!-- 2. Database configuration -->
 	<!-- 2.1 JPA Repository -->
-	<jpa:repositories base-package="org.lba.spring4.repository" />
+	<jpa:repositories base-package="org.lba.sample.spring3.repository" />
 	<tx:annotation-driven />
 	<tx:jta-transaction-manager />
 	<!-- 2.2 DataSource definition -->
@@ -64,10 +57,5 @@
 		id="transactionManager">
 		<property name="entityManagerFactory" ref="entityManagerFactory" />
 	</bean>
-
-	<jdbc:initialize-database
-		data-source="datasource" ignore-failures="DROPS">
-		<jdbc:script location="classpath:/h2-config/sql/data-load.sql" />
-	</jdbc:initialize-database>
 
 </beans>

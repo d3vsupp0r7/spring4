@@ -1,0 +1,3 @@
+INSERT INTO employee (id, name,surname,bornDate) VALUES (1, 'ASampleTestName001', 'ASampleTestSurname001',to_date('01/01/1980','dd/MM/yyyy') );
+INSERT INTO employee (id, name,surname,bornDate) VALUES (2, 'ASampleTestName002', 'ASampleTestSurname002',to_date('01/02/1980','dd/MM/yyyy') );
+INSERT INTO employee (id, name,surname,bornDate) VALUES (3, 'ASampleTestName003', 'ASampleTestSurname003',to_date('01/03/1980','dd/MM/yyyy') );

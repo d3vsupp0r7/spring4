@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 import java.util.Date;
+import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.junit.Test;
@@ -46,6 +47,14 @@ public class SaveEmployeeTest {
 		assertEquals(model.getId(), savedEmployee.getId());
 		assertEquals(model.getSurname(), savedEmployee.getSurname());
 		assertEquals(model.getName(), savedEmployee.getName());
+	}
+	
+	@Test 
+	public void readEmployees() {
+		List<EmployeeModel> listEmployee = employeeService.getAllEmployee();
+		logger.debug("Employees size: " + listEmployee.size());
+		assertNotNull(listEmployee);
+		
 	}
 	
 	private EmployeeModel getTestEmployeeModel() {
