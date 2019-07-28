@@ -2,6 +2,7 @@
 
 * [Scope](#scope)
 * [Prerequisite](#prerequisite)
+* [Installing](#installing)
 * [Getting started](#getting-started)
   * [H2 Sql Script files](#h2-sql-script-files)
     * [Installing](#installing)
@@ -11,12 +12,13 @@
   * [H2 Configure the Spring XML context file](#h2-configure-the-spring-xml-context-file)
     * [H2 Enable web console](#h2-enable-web-console)
     * [Login to H2 web console](#login-to-h2-web-console)
+* [Spring Configuration](#spring-configuration)
+  * [Web Configuration](#web-configuration)
 * [Rest API](#rest-api)    
   * [Create API](#create-api)
   * [Read API](#read-api)
   * [Update API](#update-api)
   * [Delete API](#delete-api)
-
 * [Built with](#built-with)
     * [Default library dependency](#default-library-dependency)
       * [Maven plugins](#maven-plugins)
@@ -31,6 +33,11 @@ This is a Spring 4.x XML configuration CRUD example, based on employee managemen
 * Java version 1.8
 * Maven 
 
+# Installing
+
+This application was tested on following application server:  
+*) Apache Tomcat 8.5.x
+
 # Getting started
 
 ## H2 Sql Script files
@@ -42,10 +49,6 @@ Path: spring4_mvc_helloworld/scr/main/resources/**schema.sql**
 ### Data
 
 Path: spring4_mvc_helloworld/scr/main/resources/**data.sql**  
-
-
-### Installing
-*TO_DO*
 
 # Navigation paths UI
 
@@ -96,7 +99,6 @@ In order to enable the H2 web console you need to define the following beans ins
 
 ```
 
-
 ### Login to H2 web console
 
 Go to http://localhost:9010 and enter the following data:  
@@ -110,6 +112,9 @@ ${project.basedir}/scr/main/resources/**dbConnectionH2.properties**
 
 ![H2 Web console login](Screenshot/h2/1_h2_web_console_login.png)
 
+# Spring Configuration
+
+## Web Configuration
 
 # Rest API
 
@@ -142,12 +147,10 @@ http://localhost:8080/spring4_mvc_helloworld/rest/api/employee/1
 ### Spring framework
 * **spring.version:** 4.3.24
 
-
 ### Utils library
 
 #### Database
 * **h2.version:** 1.4.199
-
 
 ## Authors
 *TO_DO*
