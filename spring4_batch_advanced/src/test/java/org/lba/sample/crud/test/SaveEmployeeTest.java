@@ -34,7 +34,7 @@ public class SaveEmployeeTest {
 	
 	@Test 
 	public void saveEmployee() {
-		
+		logger.debug("** TEST saveEmployee - START **");
 		EmployeeModel model = getTestEmployeeModel();
 		/**/
 		EmployeeModel savedEmployee = employeeService.saveModelObject(model);
@@ -47,14 +47,20 @@ public class SaveEmployeeTest {
 		assertEquals(model.getId(), savedEmployee.getId());
 		assertEquals(model.getSurname(), savedEmployee.getSurname());
 		assertEquals(model.getName(), savedEmployee.getName());
+		/**/
+		logger.debug("** TEST saveEmployee -   END **");
 	}
 	
 	@Test 
 	public void readEmployees() {
+		
+		logger.debug("** TEST readEmployees - START **");
+		
 		List<EmployeeModel> listEmployee = employeeService.getAllEmployee();
 		logger.debug("Employees size: " + listEmployee.size());
 		assertNotNull(listEmployee);
 		
+		logger.debug("** TEST readEmployees -   END **");
 	}
 	
 	private EmployeeModel getTestEmployeeModel() {
