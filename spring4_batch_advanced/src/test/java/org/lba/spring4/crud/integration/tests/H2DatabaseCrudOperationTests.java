@@ -1,4 +1,4 @@
-package org.lba.sample.crud.test;
+package org.lba.spring4.crud.integration.tests;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -18,18 +18,20 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {
-        "classpath:spring-test-context.xml"})
-public class SaveEmployeeTest {
+        "classpath:/springTestContext/crud/spring-test-context-crud_with_initial_load.xml"})
+public class H2DatabaseCrudOperationTests {
 
-	final static Logger logger = Logger.getLogger(SaveEmployeeTest.class);
+	final static Logger logger = Logger.getLogger(H2DatabaseCrudOperationTests.class);
 	
 	@Autowired
 	private EmployeeService employeeService;
 	
 	@Test
-	public void sayHelloEmployee() {
+	public void testSpringContextLoading() {
+		logger.debug("** TEST testSpringContextLoading() - START **");
 		logger.debug("A sample test for checking the spring test context bean build correctly");
 		employeeService.sayHello();
+		logger.debug("** TEST testSpringContextLoading() - START **");
 	}
 	
 	@Test 
