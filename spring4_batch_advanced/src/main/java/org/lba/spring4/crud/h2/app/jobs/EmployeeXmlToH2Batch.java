@@ -3,7 +3,7 @@ package org.lba.spring4.crud.h2.app.jobs;
 import java.util.List;
 
 import org.apache.log4j.Logger;
-import org.lba.spring4.model.EmployeeModel;
+import org.lba.spring4.model.Employee;
 import org.lba.spring4.service.EmployeeService;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.JobExecution;
@@ -40,9 +40,9 @@ public class EmployeeXmlToH2Batch {
         /*3. READ saved object to DB*/
 		logger.debug("*** READ an object to H2 Database - START ***");
 		EmployeeService launcher = context.getBean("employeeServiceImpl", EmployeeService.class);
-		List<EmployeeModel> listEmployee = launcher.getAllEmployee();
+		List<Employee> listEmployee = launcher.listAllEmployees();
 		/*4. Iterate on saved object*/
-		for (EmployeeModel employeeModel : listEmployee) {
+		for (Employee employeeModel : listEmployee) {
 			logger.debug("Employee: " + employeeModel.toString());
 		}
 	

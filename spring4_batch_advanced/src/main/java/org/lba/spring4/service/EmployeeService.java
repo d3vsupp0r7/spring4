@@ -2,16 +2,22 @@ package org.lba.spring4.service;
 
 import java.util.List;
 
-import org.lba.spring4.model.EmployeeModel;
+import org.lba.spring4.model.Employee;
 
 public interface EmployeeService {
 
-	void sampleCall();
+	//C
+	public Employee saveEmployee(Employee employee);
 
-	void sayHello();
+	//R
+	public List<Employee> listAllEmployees();
+	public Employee findById(long id);
 
-	EmployeeModel saveModelObject(EmployeeModel model);
+	//U
+	public int updateEmployeeById(long id, Employee employee);
 
-	List<EmployeeModel> getAllEmployee();
-	
+	//D
+	public void deleteEmployeeById(long id);
+
+
 }

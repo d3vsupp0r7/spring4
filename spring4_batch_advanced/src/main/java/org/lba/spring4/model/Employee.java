@@ -10,12 +10,12 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "employee")
-public class EmployeeModel implements Serializable{
+public class Employee implements Serializable{
 
 	private static final long serialVersionUID = -369768159886781215L;
 	@Id
 	@Column(name = "ID", unique = true, nullable = false)
-	private Integer id;
+	private Long id;
 	@Column
 	private String name;
 	@Column
@@ -23,15 +23,15 @@ public class EmployeeModel implements Serializable{
 	@Column
 	private Date bornDate;
 	
-	public EmployeeModel() {
+	public Employee() {
 		//Empty constructor
 	}
 
-	public Integer getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
