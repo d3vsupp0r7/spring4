@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<!-- 1. -->
+	<bean id="business"
+		class="org.lba.spring4.business.example.impl.ConcreteBusiness" />
+		
+	<bean id="clasOne"
+		class="org.lba.spring4.business.example.impl.ConcreteClassOne" />
+	
+	<!-- 2. EasyMock objects -->
+	<bean id="someDependencyMock" class="org.lba.easymock.test.util.EasyMockFactoryBean">
+        <constructor-arg name="classToBeMocked" value="org.lba.spring4.business.example.impl.ConcreteClassTwo" />
+    </bean>
+    
+    <bean id="someDependencyMockThree" class="org.lba.easymock.test.util.EasyMockFactoryBean">
+        <constructor-arg name="classToBeMocked" value="org.lba.spring4.business.example.impl.ConcreteClassThree" />
+    </bean>
+
+</beans>
