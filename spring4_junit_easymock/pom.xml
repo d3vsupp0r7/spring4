@@ -1,10 +1,12 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>org.lba.spring4.junit</groupId>
-  <artifactId>spring4_junit_easymock</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
-  
-  <!-- to run on container -->
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>org.lba.spring4.junit</groupId>
+	<artifactId>spring4_junit_easymock</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+
+	<!-- to run on container -->
 	<packaging>war</packaging>
 
 	<properties>
@@ -24,8 +26,9 @@
 		<jackson.version>2.9.9</jackson.version>
 		<!-- Test libraries -->
 		<junit.version>4.12</junit.version>
+		<hamcrest.version>1.3</hamcrest.version>
 		<easymock.version>3.1</easymock.version>
-		
+
 		<!-- In memory DB -->
 		<h2.version>1.4.199</h2.version>
 		<!-- maven plugin -->
@@ -141,6 +144,15 @@
 			<version>${junit.version}</version>
 			<scope>test</scope>
 		</dependency>
+
+		<dependency>
+			<groupId>org.hamcrest</groupId>
+			<artifactId>hamcrest-all</artifactId>
+			<version>${hamcrest.version}</version>
+			<scope>test</scope>
+		</dependency>
+
+
 		<!-- EasyMock -->
 		<dependency>
 			<groupId>org.easymock</groupId>
@@ -148,7 +160,7 @@
 			<version>${easymock.version}</version>
 			<scope>test</scope>
 		</dependency>
-		
+
 	</dependencies>
 
 	<build>
@@ -164,5 +176,5 @@
 			</plugin>
 		</plugins>
 	</build>
-	
+
 </project>
