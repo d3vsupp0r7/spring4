@@ -71,8 +71,9 @@ This section is used to test the following data interaction:
 * Large data type: CLOB and BLOB type
 
 
-http://localhost:8080/spring4_mvc_advanced/employee-full-web/readFullEmployees
-http://localhost:8080/spring4_mvc_advanced/employee-full-web/addFullEmployee
+http://localhost:8080/spring4_mvc_advanced/employee-full-web/readFullEmployees  
+http://localhost:8080/spring4_mvc_advanced/employee-full-web/addFullEmployee  
+
 
 ### H2 Web console
 http://localhost:9010
