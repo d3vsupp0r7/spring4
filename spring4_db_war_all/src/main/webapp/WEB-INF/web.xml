@@ -40,7 +40,7 @@
 	 -->
 	 <context-param>
         <param-name>spring.profiles.active</param-name>
-        <param-value>oracle,activeMQ</param-value>
+        <param-value>h2,activeMQ</param-value>
     </context-param>
 	
 	<listener>
