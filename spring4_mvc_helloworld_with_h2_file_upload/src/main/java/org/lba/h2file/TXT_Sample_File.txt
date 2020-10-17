@@ -1,0 +1,11 @@
+This in an example file for BLOB/Binary field as TXT document.
+
+This
+
+is 
+
+a
+
+multiline 
+
+test.
