@@ -78,7 +78,7 @@ public class EmployeeNavigationControllerImpl implements EmployeeController{
 	@Override
 	@GetMapping("/readEmployees")
 	public String readAllEmployees(ModelMap model) {
-
+		// http://localhost:8080/spring4_db_war_all/employee-web/readEmployees
 		List<EmployeeDBModel> employeesFromDB = employeeService.listAllEmployees();
 		model.addAttribute("employees",employeesFromDB);
 		return "employees/allEmployees";
