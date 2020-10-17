@@ -20,7 +20,7 @@ public class ApplicationControllerImpl implements ApplicationController {
 	
 	@RequestMapping(value = "/toSaveFile",method=RequestMethod.GET)
 	public ModelAndView toSaveFile() {
-
+		// http://localhost:8080/spring4_db_war_all/toSaveFile
 		return new ModelAndView("submitSingleFile");
 	}
 }
