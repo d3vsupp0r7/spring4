@@ -5,8 +5,7 @@
 * [Installing](#installing)
 * [Getting started](#getting-started)
 * [Spring Configuration](#spring-configuration)
-  * [Web Configuration](#web-configuration)
-
+  * [Database](#database)
 * [Built with](#built-with)
     * [Default library dependency](#default-library-dependency)
       * [Maven plugins](#maven-plugins)
