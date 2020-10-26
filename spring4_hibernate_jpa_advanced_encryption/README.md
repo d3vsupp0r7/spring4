@@ -1,17 +1,70 @@
-AttributeConverter
+# Table of Contents
 
-Entity Listeners 
+* [Scope](#scope)
+* [Prerequisite](#prerequisite)
+* [Installing](#installing)
+* [Getting started](#getting-started)
+* [Spring Configuration](#spring-configuration)
+  * [Database](#database)
+* [Built with](#built-with)
+    * [Default library dependency](#default-library-dependency)
+      * [Maven plugins](#maven-plugins)
+  * [Authors](#authors)  
+  * [Licence](#licence)
+  
+# Scope
 
-#Error
+This is a Spring 4.x XML configuration CRUD example, based on employee management domain.  
+This project has the scope to illustrate a basic Field Level Encription using Hibernate and H2 database.
 
-NoClassDefFoundError: org/hibernate/ejb/HibernatePersistence
+# Prerequisite
+* Java version 1.8
+* Maven 
 
-<!-- ADDED -->
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-orm</artifactId>
-			<version>${spring.version}</version>
-		</dependency>
-		
-# External refs
-		https://sultanov.dev/blog/database-column-level-encryption-with-spring-data-jpa/
+# Installing
+
+This application is a standalone Spring 4.x application per integration test of:  
+*) JPA
+*) Hibernate Framework  
+*) Spring Data
+*) Database Field Encryption (encrypt and decript data on database columns)
+
+# Getting started
+
+
+# Spring Configuration
+
+## Database
+
+## Repository
+
+
+# Built with
+* [Java SDK Version](http://www.oracle.com/technetwork/java/javase/downloads/index.html) - 1.8
+* [Maven](https://maven.apache.org/) - Dependency Management
+
+## Default library dependency
+
+### Maven plugins
+* **maven-compiler-plugin.version:** 3.6.1
+
+### Spring framework
+* **spring.version:** 4.3.10.RELEASE
+
+### Hibernate framework
+* **hibernate.version:** 5.3.10.Final
+
+### Utils library
+
+#### Database
+* **h2.version:** 1.4.199
+* **
+
+## Authors
+*TO_DO*
+
+## Licence
+*TO_DO*
+
+## Acknowledgments
+*TO_DO*
