@@ -51,7 +51,7 @@ http.antMatcher("/**").authorizeRequests()
 ## Maven dependency
 
 ### Versions
-spring-security was nneded for **oauth2Login()** method.
+spring-security was needed for **oauth2Login()** method.
 
 ```
 ...
