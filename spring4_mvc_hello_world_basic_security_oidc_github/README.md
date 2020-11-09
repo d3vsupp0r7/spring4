@@ -14,7 +14,7 @@ Implement a spring4 mvc OAuth2 Authentication without springboot framework.
 # OIDC/OAuth2 Authorization callback URL
 
 **template url:** {baseUrl}/login/oauth2/code/{registrationId}  
-ES: http://localhost:8080/spring5_mvc_hello_world_basic_security_oidc_github/login/oauth2/code/github  
+ES: http://localhost:8080/spring4_mvc_hello_world_basic_security_oidc_github/login/oauth2/code/github  
 
 # Important security patter for SecurityConfig
 
