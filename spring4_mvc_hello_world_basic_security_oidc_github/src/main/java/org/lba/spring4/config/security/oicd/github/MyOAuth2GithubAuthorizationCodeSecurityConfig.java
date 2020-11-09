@@ -23,9 +23,6 @@ public class MyOAuth2GithubAuthorizationCodeSecurityConfig extends WebSecurityCo
 	
 	 */
 	
-//	@Autowired
-//	private CustomOAuth2UserService oAuth2UserService;
-	
 	@Bean
 	public ClientRegistrationRepository ClientRegistrationRepository() {
 		
