@@ -23,11 +23,9 @@ public interface EmployeeRepository extends JpaRepository<Employee, Long>{
 	List<Employee> findByNameNamedExternalFileJPAQuery(String name);
 
 	/** Native External query on properties file **/
-	//@Query(name = "Employee.findAllNameNativeQueryExternalFile", nativeQuery = true)
 	@Query(nativeQuery = true)
 	public List<Employee> findAllNameNativeQueryExternalFile();
 	
-	//@Query(name = "Employee.findByNameNativeQueryExternalFile", nativeQuery = true)
 	@Query(nativeQuery = true)
 	public List<Employee> findByNameNativeQueryExternalFile(@Param("name") String name);
 
