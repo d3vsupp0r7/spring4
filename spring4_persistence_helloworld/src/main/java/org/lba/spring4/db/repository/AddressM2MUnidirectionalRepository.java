@@ -9,6 +9,6 @@ public interface AddressM2MUnidirectionalRepository extends JpaRepository<Addres
 
 	AddressM2MUnidirectional findById(Long id);
 
-	AddressM2MUnidirectional findByName(String name);
+	AddressM2MUnidirectional findByCity(String city);
 
 }
