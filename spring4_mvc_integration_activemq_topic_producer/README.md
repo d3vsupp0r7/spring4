@@ -181,7 +181,7 @@ Connect your channels without SI copuling
 **Endpoint:** http://localhost:8080/spring4_mvc_integration_activemq_topic_producer/activemq/topic/springintegration/obj/message  
 **Type:** POST  
 **Message:** EmployeeComplexPayload  
-** EmployeeComplexPayload Body **
+**EmployeeComplexPayload Body**
 
 ```
 {"customMetadata":{"maxMessages":5},"employeeIntegrationPayload":{"id":1,"name":"EmployeeName","surname":"EmployeeSurname"}}
