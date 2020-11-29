@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:integration="http://www.springframework.org/schema/integration"
+	xmlns:integration-jms="http://www.springframework.org/schema/integration/jms"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/integration
+    http://www.springframework.org/schema/integration/spring-integration.xsd
+    http://www.springframework.org/schema/integration/jms
+    http://www.springframework.org/schema/integration/jms/spring-integration-jms.xsd">
+
+	<!-- 1. channel definition -->
+	<integration:channel id="activemq-inputChannel"></integration:channel>
+	<integration:channel id="activemq-outputChannel"></integration:channel>
+
+	<!-- 2. -->
+	<integration-jms:outbound-channel-adapter
+		id="jmsOut" channel="activemq-inputChannel" destination-name="activemq-springintegration-queue">
+	</integration-jms:outbound-channel-adapter>
+	
+	<!-- 3. message-driven-channel-adapter
+	Receives JMS messages from the specified destination at the connection created by the connection factory.
+	The JMS server will actively push messages to this channel adapter when they become available, resulting in message driven, real-time communication. 
+	In the vast majority of JMS-based use-cases, this approach is preferable to the polling approach of the JMS inbound channel adapter.
+	
+	Params:
+	destination-name: A provider-specific destination name, usually either the name of a JMS queue or JMS topic.
+	-->
+	<!-- Automatic dequeue
+	
+		<integration-jms:message-driven-channel-adapter
+		id="jmsIn" channel="activemq-outputChannel" destination-name="activemq-springintegration-queue" />
+		
+			<integration:service-activator
+		id="messageHandler" input-channel="activemq-outputChannel" ref="activeMQSpringIntegrationServiceActivator">
+	</integration:service-activator>
+		
+		 -->
+	
+	<!-- 4. ServiceActivator definition -->
+	<integration:service-activator
+		id="messageHandler" input-channel="activemq-inputChannel" ref="activeMQSpringIntegrationQueueReceiverServiceActivator">
+	</integration:service-activator>
+
+</beans>

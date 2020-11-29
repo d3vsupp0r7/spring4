@@ -1,0 +1,120 @@
+{
+	"info": {
+		"_postman_id": "c51ca9d5-a731-4319-9bad-0aee8f4540e0",
+		"name": "spring4_mvc_integration_activemq_topic_producer",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GET - listAllEmployees",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/spring4_mvc_integration_activemq_topic_producer/rest/api/employees",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"spring4_mvc_integration_activemq_topic_producer",
+						"rest",
+						"api",
+						"employees"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET - readEmployeeById",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/spring4_mvc_integration_activemq_topic_producer/rest/api/employee/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"spring4_mvc_integration_activemq_topic_producer",
+						"rest",
+						"api",
+						"employee",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST - createEmployee",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"name\":\"aName_From_RestApi\",\n\"surname\":\"aSurname_From_RestApi\"}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/spring4_mvc_integration_activemq_topic_producer/rest/api/employee",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"spring4_mvc_integration_activemq_topic_producer",
+						"rest",
+						"api",
+						"employee"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PUT - updateEmployeeById",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"id\":\"1003\",\r\n    \"name\":\"aName_From_RestApi_Update\",\r\n\"surname\":\"aSurname_From_RestApi_Update\"}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/spring4_mvc_integration_activemq_topic_producer/rest/api/employee/1003",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"spring4_mvc_integration_activemq_topic_producer",
+						"rest",
+						"api",
+						"employee",
+						"1003"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

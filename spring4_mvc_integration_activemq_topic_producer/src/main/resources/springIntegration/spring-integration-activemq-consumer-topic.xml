@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:integration="http://www.springframework.org/schema/integration"
+	xmlns:integration-jms="http://www.springframework.org/schema/integration/jms"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/integration
+    http://www.springframework.org/schema/integration/spring-integration.xsd
+    http://www.springframework.org/schema/integration/jms
+    http://www.springframework.org/schema/integration/jms/spring-integration-jms.xsd">
+
+	<integration:publish-subscribe-channel
+		id="activemq-topic-InputChannel" />
+
+	<integration-jms:message-driven-channel-adapter
+		id="messageDrivenAdapter" channel="activemq-topic-InputChannel"
+		destination-name="activemq-springintegration-topic"
+		pub-sub-domain="true" />
+
+	<integration:service-activator id="offeringmsg1"
+		input-channel="activemq-topic-InputChannel" ref="impl1" />
+
+	<integration:service-activator id="offeringmsg2"
+		input-channel="activemq-topic-InputChannel" ref="impl2" />
+
+	<bean id="impl1" class="org.lba.spring4.integration.serviceactivator.activemq.topic.consumer.subscribers.Subscriber1" />
+
+	<bean id="impl2" class="org.lba.spring4.integration.serviceactivator.activemq.topic.consumer.subscribers.Subscriber2" />
+
+</beans>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:int="http://www.springframework.org/schema/integration"
+	xmlns:jms="http://www.springframework.org/schema/integration/jms"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/integration
+    http://www.springframework.org/schema/integration/spring-integration.xsd
+    http://www.springframework.org/schema/integration/jms
+    http://www.springframework.org/schema/integration/jms/spring-integration-jms.xsd">
+
+	<int:channel id="simpleOPFilterInputChannel" />
+	<int:channel id="simpleOPFilterOutputChannel">
+		<int:queue capacity="10"/>
+	</int:channel>
+	<int:channel id="OPFilterDiscardChanner" />
+	
+	<int:service-activator input-channel="simpleOPFilterInputChannel" 
+	output-channel="simpleOPFilterOutputChannel" ref="simpleServiceActivatorObjectPayload" /> 
+	
+	<int:transformer input-channel="simpleOPFilterInputChannel"
+		output-channel="simpleOPOutputChannel" ref="employeeIntegrationPayloadMapToObjectTransformer" />
+		
+	<int:filter input-channel="simpleOPFilterInputChannel"
+		output-channel="simpleOPOutputChannel" ref="employeeSpringIntegrationFilter"
+		discard-channel="OPFilterDiscardChanner">
+	</int:filter>
+	
+	<bean id="employeeSpringIntegrationFilter"
+		class="org.lba.spring4.integration.filter.EmployeeSpringIntegrationFilter" />
+		
+</beans>
