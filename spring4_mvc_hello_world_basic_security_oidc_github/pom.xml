@@ -48,7 +48,7 @@
 		<apache.commons-fileupload.version>1.4</apache.commons-fileupload.version>
 
 		<!-- Test libraries -->
-		<junit.version>4.12</junit.version>
+		<junit.version>4.13.1</junit.version>
 
 		<!-- In memory DB -->
 		<h2.version>1.4.199</h2.version>
