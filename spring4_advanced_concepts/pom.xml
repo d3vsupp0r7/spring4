@@ -1,0 +1,110 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>org.lba.spring4</groupId>
+  <artifactId>spring4_advanced_concepts</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  
+  <properties>
+		<!-- Java -->
+		<java.version>1.8</java.version>
+		
+		<!-- Spring -->
+		<spring.version>4.3.23.RELEASE</spring.version>
+
+		<!-- Util library -->
+		<log4j.version>1.2.17</log4j.version>
+		<slf4j.version>1.6.1</slf4j.version>
+		
+		<!-- PODAM -->
+		<podam.version>7.2.5.RELEASE</podam.version>
+		
+		<!-- Test libraries -->
+		<junit.version>4.12</junit.version>
+		
+		<!-- In memory DB -->
+		<h2.version>1.4.199</h2.version>
+
+		<!-- maven plugin -->
+		<maven-compiler-plugin.version>3.8.0</maven-compiler-plugin.version>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		
+	</properties>
+
+	<dependencies>
+	
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-core</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		
+		<!-- Util library -->
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>${log4j.version}</version>
+		</dependency>
+		
+		<!-- Slf4j Log -->
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-simple</artifactId>
+			<version>${slf4j.version}</version>
+		</dependency>
+		
+		<!-- PODAM -->
+		<dependency>
+			<groupId>uk.co.jemos.podam</groupId>
+			<artifactId>podam</artifactId>
+			<version>${podam.version}</version>
+		</dependency>
+				
+		<!-- Test library -->
+		<!-- Sping Test -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
+			<version>${spring.version}</version>
+			<scope>test</scope>
+		</dependency>
+		
+		<!-- Junit -->
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>${junit.version}</version>
+			<scope>test</scope>
+		</dependency>
+		
+		<!-- H2 -->
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+			<version>${h2.version}</version>
+		</dependency>
+
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>${maven-compiler-plugin.version}</version>
+				<configuration>
+					<source>${java.version}</source>
+					<target>${java.version}</target>
+					<encoding>${project.build.sourceEncoding}</encoding>
+				</configuration>
+			</plugin>
+		</plugins>
+
+	</build>
+	
+</project>
