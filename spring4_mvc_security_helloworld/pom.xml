@@ -19,7 +19,7 @@
 		<spring-security.version>4.2.13.RELEASE</spring-security.version>
 
 		<!-- Database Framework -->
-		<hibernate.version>4.3.11.Final</hibernate.version>
+		<hibernate.version>5.4.24.Final</hibernate.version>
 		<!-- Util library -->
 		<log4j.version>1.2.17</log4j.version>
 		<slf4j.version>1.6.1</slf4j.version>
