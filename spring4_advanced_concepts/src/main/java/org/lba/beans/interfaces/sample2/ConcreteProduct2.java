@@ -16,19 +16,19 @@ public class ConcreteProduct2 implements Product{
 	/**/
 	@Autowired
 	@Qualifier("createOperationHandler")
-	private CRUDOperationHandler createOperatioHandler;
+	private CRUDOperationHandler createOperationHandler;
 	
 	@Autowired
 	@Qualifier("readOperationHandler")
-	private CRUDOperationHandler readOperatioHandler;
+	private CRUDOperationHandler readOperationHandler;
 	
 	@Autowired
 	@Qualifier("updateOperationHandler")
-	private CRUDOperationHandler updateOperatioHandler;
+	private CRUDOperationHandler updateOperationHandler;
 	
 	@Autowired
 	@Qualifier("deleteOperationHandler")
-	private CRUDOperationHandler deleteOperatioHandler;
+	private CRUDOperationHandler deleteOperationHandler;
 	
 	public ConcreteProduct2() {
 		// Implement if necessary
@@ -95,28 +95,28 @@ public class ConcreteProduct2 implements Product{
 		case "CREATE":
 			LOGGER.debug("processOperationHandler - PRODUCT_2 - CREATE");
 			/**/
-			createOperatioHandler.processWithParam(employee);
+			createOperationHandler.processWithParam(employee);
 			/**/
 			break;
 			
 		case "READ":
 			LOGGER.debug("processOperationHandler - PRODUCT_2 - READ");
 			/**/
-			readOperatioHandler.processWithParam(employee);
+			readOperationHandler.processWithParam(employee);
 			/**/
 			break;
 			
 		case "UPDATE":
 			LOGGER.debug("processOperationHandler - PRODUCT_2 - UPDATE");
 			/**/
-			updateOperatioHandler.processWithParam(employee);
+			updateOperationHandler.processWithParam(employee);
 			/**/
 			break;
 			
 		case "DELETE":
 			LOGGER.debug("processOperationHandler - PRODUCT_2 - DELETE");
 			/**/
-			deleteOperatioHandler.processWithParam(employee);
+			deleteOperationHandler.processWithParam(employee);
 			break;
 
 		default:
