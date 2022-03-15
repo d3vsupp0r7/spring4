@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd">
+
+	<!-- XML - EXAMPLE_1 -->
+	<!-- 0. IMPO - Define for bean autowiring -->
+	<context:annotation-config />
+	<context:component-scan
+		base-package="org.lba.beans.interfaces.multiimpl.example" />
+
+	<!-- Define processing -->
+	<!-- 1. add Main class under spring context -->
+	<bean id="mainAppSpringBean"
+		class="org.lba.beans.interfaces.multiimpl.example.InterfaceFactoryMethod_Example1_InvalidOperationHandler_App" />
+
+	<!-- 1. add Main class under spring context -->
+	<bean id="mainAppSpringBean2"
+		class="org.lba.beans.interfaces.multiimpl.example.InterfaceFactoryMethod_Example1_ManageOperationHandler_App" />
+
+	<!-- Bean Architecture Config -->
+	<bean id="factoryMethodImpl"
+		class="org.lba.beans.interfaces.multiimpl.example.FactoryMethodImpl" />
+
+	<bean id="product1"
+		class="org.lba.beans.interfaces.multiimpl.example.ConcreteProduct1" />
+
+	<bean id="product2"
+		class="org.lba.beans.interfaces.multiimpl.example.ConcreteProduct2" />
+
+	<!-- Operation handlers -->
+	<bean id="createOperationHandler"
+		class="org.lba.beans.interfaces.multiimpl.example.CreateOperationHandler" />
+	<bean id="readOperationHandler"
+		class="org.lba.beans.interfaces.multiimpl.example.ReadOperationHandler" />
+	<bean id="updateOperationHandler"
+		class="org.lba.beans.interfaces.multiimpl.example.UpdateOperationHandler" />
+	<bean id="deleteOperationHandler"
+		class="org.lba.beans.interfaces.multiimpl.example.DeleteOperationHandler" />
+
+</beans>
