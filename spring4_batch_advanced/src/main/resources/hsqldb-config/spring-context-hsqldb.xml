@@ -9,13 +9,8 @@
 
 	<!-- DB Configuration parameters on properties -->
 	<context:property-placeholder
-		location="classpath:/hsqldb-config/dbConnectionHSQLDB.properties,
-         classpath:springBeans.properties"
+		location="classpath:/hsqldb-config/dbConnectionHSQLDB.properties"
 		ignore-unresolvable="false" />
-
-	<!-- 0 Standard bean definition -->
-	<bean id="helloBean" class="${spring.beans.helloBean.fqn}">
-	</bean>
 
 	<!-- 1. Autoscan for service -->
 	<context:component-scan base-package="org.lba.spring4.service.impl">

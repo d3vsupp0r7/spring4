@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans
+	xsi:schemaLocation=" http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd 
+	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd 
+	http://www.springframework.org/schema/tx  http://www.springframework.org/schema/tx/spring-tx.xsd 
+	http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa.xsd
+	http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc.xsd "
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+	xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns="http://www.springframework.org/schema/beans">
+
+	<!-- DB Configuration parameters on properties -->
+	<context:property-placeholder
+		location="classpath:/hsqldb-config/dbConnectionHSQLDB.properties"
+		ignore-unresolvable="false" />
+
+	<!-- 1. Autoscan for service -->
+	<context:component-scan base-package="org.lba.spring4.service.impl">
+	</context:component-scan>
+	<!-- 2. Database configuration -->
+	<!-- 2.1 JPA Repository -->
+	<jpa:repositories base-package="org.lba.spring4.repository" />
+	<tx:annotation-driven />
+	<tx:jta-transaction-manager />
+	<!-- 2.2 DataSource definition -->
+	<bean class="org.springframework.jdbc.datasource.DriverManagerDataSource"
+		id="dataSource">
+		<property value="${db.connection.driver_class}" name="driverClassName" />
+		<property value="${jdbc.connection.url}" name="url" />
+		<property value="${db.connection.username}" name="username" />
+		<property value="${db.connection.password}" name="password" />
+	</bean>
+	<!-- 2.3 EntityManagerFactory -->
+	<bean
+		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean"
+		id="entityManagerFactory">
+
+		<property name="dataSource" ref="dataSource" />
+		<property value="${model.entity.package}" name="packagesToScan" />
+		<property name="jpaVendorAdapter">
+			<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter" />
+		</property>
+		<property name="jpaProperties">
+			<!-- H2 config -->
+			<props>
+				<prop key="hibernate.dialect">${hibernate.dialect.config}</prop>
+				<prop key="hibernate.hbm2ddl.auto">${hibernate.hbm2ddl.auto.config}</prop>
+				<!-- -->
+				<prop key="hibernate.show_sql">${hibernate.show_sql.config}</prop>
+				<prop key="hibernate.format_sql">${hibernate.format_sql.config}</prop>
+			</props>
+		</property>
+	</bean>
+	<!-- 2.4 Transaction manager -->
+	<bean class="org.springframework.orm.jpa.JpaTransactionManager"
+		id="transactionManager">
+		<property name="entityManagerFactory" ref="entityManagerFactory" />
+	</bean>
+	
+	<!-- Execute intial load with custom file name -->
+	<jdbc:initialize-database
+		data-source="dataSource" ignore-failures="DROPS">
+		<jdbc:script location="classpath:/h2-config/sql/data-load-hsqldb.sql" />
+	</jdbc:initialize-database>
+	
+	<!-- H2 web console config -->
+	<!-- Web PAth: http://localhost:9011
+	For jdbc connetion url see file: dbConnectionHSQLDB.properties
+	As example:
+	jdbc connetion url: jdbc:hsqldb:mem:mydatabase;DB_CLOSE_DELAY=-1 -->
+	<bean id="h2Server" class="org.h2.tools.Server"
+			factory-method="createTcpServer" init-method="start"
+			destroy-method="stop" depends-on="h2WebServer">
+			<constructor-arg
+				value="-tcp,-tcpAllowOthers,-tcpPort,9093" />
+	</bean>
+	
+	<bean id="h2WebServer" class="org.h2.tools.Server"
+			factory-method="createWebServer" init-method="start"
+			destroy-method="stop">
+			<constructor-arg
+				value="-web,-webAllowOthers,-webPort,9011" />
+	</bean>
+	
+<!-- <bean id="hqlServer" class="org.hsqldb.server.Server" init-method="start" destroy-method="stop">
+    <property name="properties"><bean class="org.hsqldb.persist.HsqlProperties">
+        <constructor-arg><props>
+        <prop key="server.database.0">mem:mydatabase</prop>
+        <prop key="server.dbname.0">mydatabase</prop>   DB name for network connection
+        <prop key="server.no_system_exit">true</prop>
+        <prop key="server.port">9001</prop>             default port is 9001 
+        </props></constructor-arg>
+    </bean></property>
+</bean> -->
+	
+	
+
+<!-- Open hsqldb SWING gui -->
+<!-- &#45;&#45; means double - sign
+	<bean depends-on="dataSource"
+	class="org.springframework.beans.factory.config.MethodInvokingBean">
+	<property name="targetClass" value="org.hsqldb.util.DatabaseManagerSwing" />
+	<property name="targetMethod" value="main" />
+	<property name="arguments">
+		<list>
+			<value>&#45;&#45;url</value>
+			<value>jdbc:hsqldb:mem:mydatabase</value>
+			<value>&#45;&#45;user</value>
+			<value>sa</value>
+			<value>&#45;&#45;password</value>
+			<value></value>
+		</list>
+	</property>
+</bean> -->
+
+
+</beans>
