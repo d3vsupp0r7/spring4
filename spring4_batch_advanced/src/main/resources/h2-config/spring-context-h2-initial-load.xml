@@ -14,13 +14,8 @@
 
 	<!-- DB Configuration parameters on properties -->
 	<context:property-placeholder
-		location="classpath:/h2-config/dbConnectionH2.properties,
-         classpath:springBeans.properties"
+		location="classpath:/h2-config/dbConnectionH2.properties"
 		ignore-unresolvable="false" />
-
-	<!-- 0 Standard bean definition -->
-	<bean id="helloBean" class="${spring.beans.helloBean.fqn}">
-	</bean>
 
 	<!-- 1. Autoscan for service -->
 	<context:component-scan base-package="org.lba.spring4.service.impl">
@@ -59,15 +54,36 @@
 			</props>
 		</property>
 	</bean>
+	
 	<!-- 2.4 Transaction manager -->
 	<bean class="org.springframework.orm.jpa.JpaTransactionManager"
 		id="transactionManager">
 		<property name="entityManagerFactory" ref="entityManagerFactory" />
 	</bean>
 
+	<!-- Execute intial load with custom file name -->
 	<jdbc:initialize-database
 		data-source="datasource" ignore-failures="DROPS">
 		<jdbc:script location="classpath:/h2-config/sql/data-load.sql" />
 	</jdbc:initialize-database>
+	
+	<!-- H2 web console config -->
+	<!-- Web PAth: http://localhost:9011
+	For jdbc connetion url see file: dbConnectionH2.properties
+	As example:
+	jdbc connetion url: jdbc:h2:mem:mydatabase;DB_CLOSE_DELAY=-1 -->
+	<bean id="h2Server" class="org.h2.tools.Server"
+			factory-method="createTcpServer" init-method="start"
+			destroy-method="stop" depends-on="h2WebServer">
+			<constructor-arg
+				value="-tcp,-tcpAllowOthers,-tcpPort,9093" />
+	</bean>
+	
+	<bean id="h2WebServer" class="org.h2.tools.Server"
+			factory-method="createWebServer" init-method="start"
+			destroy-method="stop">
+			<constructor-arg
+				value="-web,-webAllowOthers,-webPort,9011" />
+	</bean>
 
 </beans>

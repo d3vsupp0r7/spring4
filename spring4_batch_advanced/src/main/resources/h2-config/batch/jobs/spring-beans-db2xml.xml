@@ -41,14 +41,18 @@ http://www.springframework.org/schema/util	http://www.springframework.org/schema
 		<property name="rootTagName" value="employees" />
 	</bean>
 	
-	<bean id="employeeUnmarshaller" 
+	<bean id="employeeModel" class="org.lba.spring4.model.Employee" />
+	
+	 <bean id="employeeUnmarshaller" 
                 class="org.springframework.oxm.xstream.XStreamMarshaller">
 		<property name="aliases">
 			<util:map id="aliases">
-				<entry key="employee" value="org.lba.spring4.model.EmployeeModel" />
+				<entry key="employee" value="org.lba.spring4.xml.model.EmployeeXmlModel" />
 			</util:map>
 		</property>
-	</bean>
+	</bean> 
+	
+
 	
 	<!-- 4. Job definition -->
 	<batch:job id="H2DBtoXmlFileJob">
