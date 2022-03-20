@@ -1,7 +1,13 @@
 # Table of Contents
 
 * [Scope](#scope)
-  * [Getting started](#getting-started)
+* [Getting started](#getting-started)
+  * [Spring Batch](#spring-batch)
+    * [Flow](#flow)
+    * [Spring Batch Component](#spring-batch-component)
+        * [ItemReader](#itemreader)
+        * [ItemProcessor](#itemprocessor)
+        * [ItemWriter](#itemwriter)
   * [Prerequisite](#prerequisite)
     * [Installing](#installing)
   * [Running Test](#running-test)
@@ -20,18 +26,58 @@ Spring 4.X batch advanced example.
 
 *TO_DO*
 
-## Getting started
-*TO_DO*
+# Getting started
+
+## Package org.lba.spring4
+**Spring context file:** spring-context.xml
+
+This package and spring context file configuration uses the **springBeans.properties** file to load bean into spring context. This is an example on how to externalize bean classes to instantiate with Spring Framework.
+
+### Code notes
+
+1. Inside the **springBeans.properties** define bean property and full qualified name (FQN) of class we want to instantiate with Spring Framework.
+
+```
+spring.beans.helloBean.fqn=org.lba.spring4.HelloWorldSpringBean
+```
+
+2. Inside the classes you now can use the @Autowired or Application context to get the bean.
+
+## Package org.lba.spring4.crud.h2
+
+**Class:** org.lba.spring4.crud.h2.app.EmployeeH2Main  
+**Spring context file:** classpath:/h2-config/spring-context-h2.xml  
+
+Load a spring context with a ready context in order to work with H2 database.
+No initial load was executed.  
+
+**Class:** org.lba.spring4.crud.h2.app.EmployeeH2InitialLoadMain  
+**Spring context file:** classpath:/h2-config/spring-context-h2-initial-load.xml  
+
+Load a spring context with a ready context in order to work with H2 database.
+Initial load was executed with a custom file name.
+
+### Notes
+All the packages to manage CRUD application, divided into layer are:
+
+* **Entity layer:** org.lba.spring4.model
+* **Spring Repository layer:** org.lba.spring4.repository
+* **Spring Service layer:** **org.lba.spring4.service** and **org.lba.spring4.service.impl**
+
 
 # Spring Batch 
 
 ## Flow
 
-## Component (springBatch classes)
+## Spring Batch Component
+
+### ItemReader
 
 ### ItemProcessor
 
-**ItemProcessor** is Optional, and called after item read but before item write. It gives us the opportunity to perform a business logic on each item
+**ItemProcessor** is Optional, and called after item read but before item write. It gives us the opportunity to perform a business logic on each item.
+
+### ItemWriter
 
 ### JobListener
 **JobListener** is Optional and provide the opportunity to execute some business logic before job start and after job completed.For example setting up environment can be done before job and cleanup can be done after job completed.
