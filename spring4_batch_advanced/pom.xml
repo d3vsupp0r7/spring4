@@ -17,7 +17,7 @@
 		<spring-batch.version>3.0.10.RELEASE</spring-batch.version>
 		<!-- Database Framework -->
 		<hibernate.version>4.3.11.Final</hibernate.version>
-		<hibernate-validator.version>4.3.2.Final</hibernate-validator.version>
+		<hibernate-validator.version>5.3.5.Final</hibernate-validator.version>
 		<!-- Util library -->
 		<log4j.version>1.2.17</log4j.version>
 		<slf4j.version>1.6.1</slf4j.version>
