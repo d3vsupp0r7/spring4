@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+	xmlns:task="http://www.springframework.org/schema/task"
+	xmlns:jaxws="http://cxf.apache.org/jaxws"
+	xmlns:batch="http://www.springframework.org/schema/batch"
+	xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+			http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+			http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+			http://cxf.apache.org/jaxws http://cxf.apache.org/schemas/jaxws.xsd
+			http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd 
+			http://www.springframework.org/schema/batch http://www.springframework.org/schema/batch/spring-batch.xsd
+			http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc.xsd
+			http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa.xsd 
+			http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task.xsd">
+
+	<!-- Necessary for Autowired if we use main class. Main class is not in 
+		context -->
+	<context:component-scan base-package="org.lba" />
+
+	<!-- DB Configuration parameters on properties -->
+	<context:property-placeholder
+		location="classpath:dbConnectionH2.properties"
+		ignore-unresolvable="false" />
+
+	<!-- Database configuration -->
+	<bean id="transactionManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+	<!-- Create Spring Jobs Meta-Tables Automatically -->
+	<bean id="dataSource"
+		class="org.springframework.jdbc.datasource.SingleConnectionDataSource">
+		<property name="driverClassName" value="${db.connection.driver_class}" />
+		<property name="url" value="${jdbc.connection.url}" />
+		<property name="username" value="${db.connection.username}" />
+		<property name="password" value="" />
+		<property name="suppressClose" value="true" />
+	</bean>
+
+	<jdbc:initialize-database
+		data-source="dataSource">
+		<!-- Load Spring btahc jdbc table structure -->
+		<jdbc:script
+			location="classpath:/org/springframework/batch/core/schema-h2.sql" />
+		<jdbc:script location="classpath:/schema.sql" />
+		<jdbc:script location="classpath:/data.sql" />
+	</jdbc:initialize-database>
+
+	<jpa:repositories
+		base-package="org.lba.spring4.db.repository" />
+
+	<!-- 2.3 EntityManagerFactory -->
+	<bean
+		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean"
+		id="entityManagerFactory">
+
+		<property name="dataSource" ref="dataSource" />
+		<property value="${model.entity.package}"
+			name="packagesToScan" />
+		<property name="jpaVendorAdapter">
+			<bean
+				class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter" />
+		</property>
+		<property name="jpaProperties">
+			<!-- H2 config -->
+			<props>
+				<prop key="hibernate.dialect">${hibernate.dialect.config}</prop>
+				<prop key="hibernate.hbm2ddl.auto">${hibernate.hbm2ddl.auto.config}</prop>
+				<!-- -->
+				<prop key="hibernate.show_sql">${hibernate.show_sql.config}</prop>
+				<prop key="hibernate.format_sql">${hibernate.format_sql.config}</prop>
+			</props>
+		</property>
+	</bean>
+
+	<!-- Impo for manage int properties placeholders, also if default value 
+		is present -->
+	<context:property-placeholder
+		location="classpath:application.properties" />
+
+	<!-- Additional -->
+	<bean id="jobService"
+		class="org.lba.spring4.batch.service.JobProcessorServiceImpl" />
+
+	<!-- -->
+	<batch:job-repository id="jobRepository"
+		data-source="dataSource" transaction-manager="transactionManager" />
+
+	<!-- Launch job: Synchronized launcher -->
+	<bean id="jobLauncher"
+		class="org.springframework.batch.core.launch.support.SimpleJobLauncher">
+		<property name="jobRepository" ref="jobRepository" />
+	</bean>
+
+	<bean id="jobTaskExecutor"
+		class="org.springframework.core.task.SimpleAsyncTaskExecutor">
+		<property name="concurrencyLimit"
+			value="${job.myjobpartitionconfig.partitioner.threadLimit:5}" />
+	</bean>
+
+	<!-- -->
+	<batch:job id="jobNameToRun">
+		<batch:step id="stepjobNameToRun">
+			<batch:partition step="stepjobNameToRunTasklet"
+				partitioner="partionerJobNameToRun">
+				<batch:handler
+					grid-size="${job.jobNameToRun.partitioner.gridSize:1}"
+					task-executor="jobTaskExecutor" />
+			</batch:partition>
+		</batch:step>
+	</batch:job>
+
+	<!-- Partitioner -->
+	<bean id="partionerJobNameToRun"
+		class="org.lba.spring4.batch.partitioner.JobPartitioner" scope="step">
+		<property name="partitionReader"
+			ref="readerJobPartitionerPart" />
+	</bean>
+
+	<bean id="readerJobPartitionerPart"
+		class="org.lba.spring4.batch.partitioner.PartitionerReaderImpl">
+	</bean>
+
+	<batch:step id="stepjobNameToRunTasklet">
+		<batch:tasklet>
+			<batch:chunk reader="readJobClass" writer="writeJobClass"
+				commit-interval="${job.myjobpartitionconfigList.commitInterval:10}" />
+		</batch:tasklet>
+	</batch:step>
+
+	<bean id="readJobClass" scope="step"
+		class="org.lba.spring4.batch.partitioner.JobReader">
+		<property name="chunkPropertiesDbFilter"
+			value="#{stepExecutionContext[nameChunk]}" />
+	</bean>
+
+	<bean id="writeJobClass" scope="step"
+		class="org.lba.spring4.batch.partitioner.JobWriter">
+	</bean>
+	
+	<!-- H2 -->
+	<!-- H2 web console config -->
+	<!-- Web PAth: http://localhost:9011
+	For jdbc connetion url see file: dbConnectionH2.properties
+	As example:
+	jdbc connetion url: jdbc:h2:mem:spring4_batch_example;DB_CLOSE_DELAY=-1 -->
+	<bean id="h2Server" class="org.h2.tools.Server"
+			factory-method="createTcpServer" init-method="start"
+			destroy-method="stop" depends-on="h2WebServer">
+			<constructor-arg
+				value="-tcp,-tcpAllowOthers,-tcpPort,9093" />
+		</bean>
+		<bean id="h2WebServer" class="org.h2.tools.Server"
+			factory-method="createWebServer" init-method="start"
+			destroy-method="stop">
+			<constructor-arg
+				value="-web,-webAllowOthers,-webPort,9011" />
+		</bean>
+
+
+</beans>
