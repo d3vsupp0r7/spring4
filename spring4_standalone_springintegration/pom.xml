@@ -14,7 +14,7 @@
 		<jstl.version>1.2</jstl.version>
 
 		<!-- Spring version -->
-		<spring.version>4.3.10.RELEASE</spring.version>
+		<spring.version>5.3.19</spring.version>
 		<spring-integration.version>4.3.10.RELEASE</spring-integration.version>
 		<spring-data.version>1.6.6.RELEASE</spring-data.version>
 
