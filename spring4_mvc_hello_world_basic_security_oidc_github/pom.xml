@@ -30,7 +30,7 @@
 		<spring-data.version>1.6.6.RELEASE</spring-data.version>
 
 		<!-- Spring Security -->
-		<spring-security.version>5.0.0.RELEASE</spring-security.version>
+		<spring-security.version>5.5.7</spring-security.version>
 		<!-- Spring Security OAuth2 - OIDC -->
 		<spring-oauth2.version>5.0.0.RELEASE</spring-oauth2.version>
 
