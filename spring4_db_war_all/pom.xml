@@ -20,7 +20,7 @@
 		<spring-data.version>1.6.6.RELEASE</spring-data.version>
 
 		<!-- Database Framework -->
-		<hibernate.version>5.3.10.Final</hibernate.version>
+		<hibernate.version>5.3.20.Final</hibernate.version>
 		<microsoft.sql.driver.version>8.2.2.jre8</microsoft.sql.driver.version>
 
 		<!-- Util library -->
